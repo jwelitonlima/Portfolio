@@ -1,65 +1,96 @@
-// IMMERSIVE WORKS SYSTEM - VERSÃO SIMPLIFICADA
+// ============================================
+// IMMERSIVE WORKS SYSTEM - VERSÃO CORRIGIDA
+// ============================================
 class ImmersiveWorks {
     constructor() {
         this.currentState = 'discover';
         this.currentProject = 0;
         this.isTransitioning = false;
+        this.projects = [];
         
         this.init();
     }
 
     init() {
+        if (!this.validateElements()) {
+            console.warn('⚠️ Elementos necessários não encontrados para o sistema imersivo');
+            return;
+        }
+        
         this.cacheElements();
         this.setupEventListeners();
         this.setupScrollTriggers();
         this.showCurrentProject();
+        
+        console.log('✅ Sistema Imersivo Works inicializado com sucesso');
+    }
+
+    validateElements() {
+        const worksSection = document.getElementById('work');
+        const navigation = document.querySelector('.works-navigation');
+        const previews = document.querySelectorAll('.project-preview');
+        
+        if (!worksSection) {
+            console.error('❌ Seção #work não encontrada');
+            return false;
+        }
+        
+        if (!navigation) {
+            console.warn('⚠️ .works-navigation não encontrada');
+        }
+        
+        if (previews.length === 0) {
+            console.warn('⚠️ Nenhum .project-preview encontrado');
+        }
+        
+        return true;
     }
 
     cacheElements() {
         this.worksSection = document.getElementById('work');
-        this.scenes = document.querySelectorAll('.project-scene');
         this.navigation = document.querySelector('.works-navigation');
-        this.loading = document.querySelector('.scene-loading');
+        this.projects = document.querySelectorAll('.project-preview');
+        
+        if (!this.worksSection) {
+            console.error('❌ #work não encontrado');
+            return;
+        }
+        
+        if (!this.navigation) {
+            console.warn('⚠️ .works-navigation não encontrada');
+        }
     }
 
     setupEventListeners() {
-        // Botões Descobrir
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.discover-btn')) {
-                const projectId = e.target.closest('.discover-btn').dataset.project;
-                this.enterProjectScene(projectId);
-            }
-        });
-
-        // Botão Sair
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.exit-btn')) {
-                this.exitProjectScene();
-            }
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (this.currentState === 'project' && e.key === 'Escape') {
-                this.exitProjectScene();
-            }
-        });
-
-        // Navegação por dots
-        document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+        // CORREÇÃO: Usar novo seletor .project-nav-dot
+        const dots = document.querySelectorAll('.project-nav-dot');
+        
+        if (dots.length === 0) {
+            console.warn('⚠️ Nenhum .project-nav-dot encontrado');
+            return;
+        }
+        
+        dots.forEach((dot, index) => {
             dot.addEventListener('click', () => this.goToProject(index));
         });
     }
 
     setupScrollTriggers() {
-        // Scroll entre projetos no estado discover
-        for (let index = 0; index < 4; index++) {
+        if (!this.worksSection) {
+            console.warn('⚠️ worksSection não encontrado para ScrollTriggers');
+            return;
+        }
+        
+        const projectCount = this.projects.length || 4;
+        
+        for (let index = 0; index < projectCount; index++) {
             ScrollTrigger.create({
                 trigger: this.worksSection,
                 start: `top+=${index * 100}% top`,
                 end: `top+=${(index + 1) * 100}% top`,
                 onEnter: () => this.handleProjectScroll(index),
-                onEnterBack: () => this.handleProjectScroll(index)
+                onEnterBack: () => this.handleProjectScroll(index),
+                markers: false
             });
         }
     }
@@ -73,207 +104,103 @@ class ImmersiveWorks {
     }
 
     showCurrentProject() {
-        const allPreviews = document.querySelectorAll('.project-preview');
-        allPreviews.forEach(preview => preview.classList.remove('active'));
+        if (!this.projects || this.projects.length === 0) {
+            console.warn('⚠️ Nenhum projeto encontrado para exibir');
+            return;
+        }
         
-        const currentPreview = document.querySelectorAll('.project-preview')[this.currentProject];
+        this.projects.forEach(preview => {
+            if (preview) {
+                preview.classList.remove('active');
+            }
+        });
+        
+        const currentPreview = this.projects[this.currentProject];
         if (currentPreview) {
             currentPreview.classList.add('active');
+        } else {
+            console.warn(`⚠️ Projeto ${this.currentProject} não encontrado`);
         }
     }
 
     updateNavigation() {
-        const dots = this.navigation.querySelectorAll('.nav-dot');
+        if (!this.navigation) {
+            return;
+        }
+        
+        // CORREÇÃO: Usar novo seletor .project-nav-dot
+        const dots = this.navigation.querySelectorAll('.project-nav-dot');
+        
+        if (dots.length === 0) {
+            return;
+        }
+        
         dots.forEach((dot, index) => {
             dot.classList.toggle('active', index === this.currentProject);
-        });
-    }
-
-    async enterProjectScene(projectId) {
-        if (this.isTransitioning) return;
-        
-        this.isTransitioning = true;
-        this.currentState = 'project';
-        
-        // Mostrar loading
-        this.loading.classList.add('active');
-        
-        // Encontrar cena pelo índice
-        const projectIndex = this.getProjectIndex(projectId);
-        const scene = this.scenes[projectIndex];
-        
-        if (!scene) return;
-        
-        // Preparar transição
-        await this.prepareProjectTransition();
-        
-        // Executar animação de entrada
-        await this.executeEnterTransition(scene, projectId);
-        
-        // Configurar scroll interno da cena
-        this.setupSceneScroll(scene);
-        
-        this.isTransitioning = false;
-        this.loading.classList.remove('active');
-    }
-
-    getProjectIndex(projectId) {
-        const projects = ['aurora', 'zenith', 'sphere', 'pulse'];
-        return projects.indexOf(projectId);
-    }
-
-    async prepareProjectTransition() {
-        // Esconder elementos da página principal
-        gsap.to('header, .site-head, .works-bridge, .works-navigation', {
-            opacity: 0,
-            duration: 0.3,
-            ease: 'power2.out'
-        });
-        
-        // Mostrar botão sair COM EFEITO FLUTUANTE
-        const exitBtn = document.querySelector('.exit-btn');
-        exitBtn.classList.add('floating');
-        
-        gsap.to(exitBtn, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.4,
-            ease: 'back.out(1.7)',
-            delay: 0.5
-        });
-    }
-
-    async executeEnterTransition(scene, projectId) {
-        // Mostrar cena
-        scene.classList.add('active');
-        
-        // Aplicar transição específica
-        scene.classList.add(`${projectId}-transition-enter`);
-        
-        // Animar background
-        await gsap.to(scene.querySelector('.scene-background'), {
-            scale: 1,
-            duration: 1.2,
-            ease: 'power2.out'
-        });
-        
-        // Aguardar fim da transição
-        await new Promise(resolve => {
-            setTimeout(resolve, 1400);
-        });
-        
-        // Remover classe de transição
-        scene.classList.remove(`${projectId}-transition-enter`);
-    }
-
-    setupSceneScroll(scene) {
-        const background = scene.querySelector('.scene-background');
-        const content = scene.querySelector('.scene-content');
-        
-        // Criar scroll trigger para parallax interno
-        ScrollTrigger.create({
-            trigger: scene,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1,
-            onUpdate: (self) => {
-                const progress = self.progress;
-                
-                // Parallax do background
-                gsap.to(background, {
-                    scale: 1 + (progress * 0.1),
-                    duration: 0.1
-                });
-                
-                // Revelar conteúdo conforme scroll
-                if (progress > 0.2 && !content.classList.contains('parallax-active')) {
-                    content.classList.add('parallax-active');
-                }
+            if (index === this.currentProject) {
+                dot.setAttribute('aria-current', 'true');
+            } else {
+                dot.removeAttribute('aria-current');
             }
         });
-    }
-
-    async exitProjectScene() {
-        if (this.isTransitioning) return;
-        
-        this.isTransitioning = true;
-        this.currentState = 'discover';
-        
-        const scene = this.scenes[this.currentProject];
-        
-        // Esconder botão sair E REMOVER FLUTUANTE
-        const exitBtn = document.querySelector('.exit-btn');
-        exitBtn.classList.remove('floating');
-        
-        gsap.to(exitBtn, {
-            opacity: 0,
-            scale: 0.8,
-            duration: 0.3,
-            ease: 'power2.in'
-        });
-        
-        // Executar transição de saída
-        await this.executeExitTransition(scene);
-        
-        // Mostrar elementos da página principal
-        gsap.to('header, .site-head, .works-bridge, .works-navigation', {
-            opacity: 1,
-            duration: 0.4,
-            ease: 'power2.out'
-        });
-        
-        this.isTransitioning = false;
-    }
-
-    async executeExitTransition(scene) {
-        const projectId = this.getProjectId(this.currentProject);
-        
-        // Aplicar transição de saída
-        scene.classList.add(`${projectId}-transition-exit`);
-        
-        // Aguardar animação
-        await new Promise(resolve => {
-            setTimeout(resolve, 1200);
-        });
-        
-        // Resetar cena
-        scene.classList.remove('active');
-        scene.classList.remove(`${projectId}-transition-exit`);
-        
-        // Resetar elementos da cena
-        const content = scene.querySelector('.scene-content');
-        content.classList.remove('parallax-active');
-    }
-
-    getProjectId(index) {
-        const projects = ['aurora', 'zenith', 'sphere', 'pulse'];
-        return projects[index];
     }
 
     goToProject(index) {
         if (this.isTransitioning || index === this.currentProject) return;
         
+        if (index < 0 || index >= this.projects.length) {
+            console.warn(`⚠️ Índice de projeto inválido: ${index}`);
+            return;
+        }
+        
         this.currentProject = index;
         this.showCurrentProject();
         this.updateNavigation();
         
+        if (!this.worksSection) {
+            console.warn('⚠️ worksSection não encontrado para scroll');
+            return;
+        }
+        
+        if (!window.lenis) {
+            console.warn('⚠️ Lenis não encontrado, usando scroll nativo');
+            const scrollPosition = this.worksSection.offsetTop + (window.innerHeight * index);
+            window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+            });
+            return;
+        }
+        
         const scrollPosition = this.worksSection.offsetTop + (window.innerHeight * index);
-        lenis.scrollTo(scrollPosition, {
+        window.lenis.scrollTo(scrollPosition, {
             duration: 1.5,
             easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
         });
     }
 }
 
-// Inicializar sistema
+// ============================================
+// INICIALIZAÇÃO DO SISTEMA IMERSIVO
+// ============================================
 function initImmersiveWorks() {
-    if (document.querySelector('.works-immersive-container')) {
+    const container = document.querySelector('.works-immersive-container');
+    
+    if (!container) {
+        console.warn('⚠️ .works-immersive-container não encontrado');
+        return;
+    }
+    
+    try {
         window.immersiveWorks = new ImmersiveWorks();
-        console.log('✅ Sistema Imersivo Works inicializado - VERSÃO HTML');
+    } catch (error) {
+        console.error('❌ Erro ao inicializar sistema imersivo:', error);
     }
 }
 
-// MAIN INIT FUNCTION (mantém todas as funções originais)
+// ============================================
+// MAIN INIT FUNCTION
+// ============================================
 (function ready(cb) {
     (document.readyState !== 'loading') ? cb() : document.addEventListener('DOMContentLoaded', cb);
 })(init);
@@ -288,22 +215,36 @@ function init() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const lenis = new Lenis({
-        duration: 0.95,
-        smoothWheel: true
-    });
+    let lenis;
+    try {
+        lenis = new Lenis({
+            duration: 0.95,
+            smoothWheel: true
+        });
 
-    lenis.on('scroll', ScrollTrigger.update);
+        window.lenis = lenis;
 
-    function raf(t) {
-        lenis.raf(t);
+        lenis.on('scroll', ScrollTrigger.update);
+
+        function raf(t) {
+            lenis.raf(t);
+            requestAnimationFrame(raf);
+        }
         requestAnimationFrame(raf);
+    } catch (error) {
+        console.error('❌ Erro ao inicializar Lenis:', error);
     }
-    requestAnimationFrame(raf);
 
-    const words = ["Olá", "Hello", "Hola", "Bonjour", "Hallo"];
     const hello = document.getElementById("hello-word");
     const dot = document.querySelector(".hello-dot");
+    
+    if (!hello || !dot) {
+        console.warn('⚠️ Elementos do preloader não encontrados');
+        endPreloader();
+        return;
+    }
+
+    const words = ["Olá", "Hello", "Hola", "Bonjour", "Hallo"];
     const tlLoad = gsap.timeline({ onComplete: endPreloader });
 
     words.forEach((w, index) => {
@@ -314,19 +255,29 @@ function init() {
     });
 
     function endPreloader() {
-        gsap.to('#preloader', {
-            opacity: 0,
-            duration: 0.42,
-            ease: 'power2.inOut',
-            onComplete: () => {
-                document.getElementById('preloader')?.remove();
-                console.log('✅ Preloader removido');
-                
-                // INICIALIZAR SISTEMA IMERSIVO
-                initImmersiveWorks();
-            }
-        });
+        const preloader = document.getElementById('preloader');
+        
+        if (preloader) {
+            gsap.to(preloader, {
+                opacity: 0,
+                duration: 0.42,
+                ease: 'power2.inOut',
+                onComplete: () => {
+                    preloader.remove();
+                    console.log('✅ Preloader removido');
+                    initAfterPreloader();
+                }
+            });
+        } else {
+            initAfterPreloader();
+        }
+    }
 
+    function initAfterPreloader() {
+        setTimeout(() => {
+            initImmersiveWorks();
+        }, 100);
+        
         smoothScrollLinks();
         heroIn();
         cartierZoomEffect();
@@ -344,19 +295,39 @@ function init() {
     function smoothScrollLinks() {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                
+                if (!href || href === '#' || href === '') {
+                    console.warn('⚠️ Link com href vazio ou inválido');
+                    return;
+                }
+                
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    lenis.scrollTo(target, {
-                        offset: 0,
-                        duration: 1.2
-                    });
+                
+                try {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        if (window.lenis) {
+                            window.lenis.scrollTo(target, {
+                                offset: 0,
+                                duration: 1.2
+                            });
+                        } else {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                } catch (error) {
+                    console.error('❌ Erro ao processar link:', href, error);
                 }
             });
         });
     }
 
     function heroIn() {
+        const brand = document.querySelector('.brand-badge');
+        
+        if (!brand) return;
+        
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
         tl.from('.brand-badge', { y: -16, opacity: 0, duration: 0.32 }, 0)
             .from('.top-nav a', { y: -16, opacity: 0, stagger: 0.06, duration: 0.32 }, 0.02)
@@ -512,18 +483,27 @@ function init() {
 
         magnetic(brand, 20);
 
+        // CORREÇÃO CRÍTICA: Usar .nav-link-dot ao invés de .nav-dot
         document.querySelectorAll(".nav-link").forEach(link => {
-            const dot = link.querySelector(".nav-dot");
+            const dot = link.querySelector(".nav-link-dot");
+            
+            if (!dot) {
+                console.warn('⚠️ .nav-link-dot não encontrado no link');
+                return;
+            }
+            
             link.addEventListener("mouseenter", () => {
                 const tl = gsap.timeline();
                 tl.to(link, { y: -2, duration: 0.15, ease: "power3.out" }, 0)
                     .to(dot, { opacity: 1, scale: 1, duration: 0.18, ease: "power3.out" }, 0.02);
             });
+            
             link.addEventListener("mouseleave", () => {
                 const tl = gsap.timeline();
                 tl.to(link, { y: 0, duration: 0.18, ease: "power3.out" }, 0)
                     .to(dot, { opacity: 0, scale: 0.5, duration: 0.16, ease: "power2.in" }, 0);
             });
+            
             magnetic(link, 22);
         });
     }
@@ -566,7 +546,6 @@ function init() {
         .to(worksTitle, { opacity: 1, duration: 0.15 }, 0)
         .to(worksTitle, { scale: 1 }, 0);
 
-        // MOSTRAR NAVEGAÇÃO quando Works estiver visível
         gsap.timeline({
             scrollTrigger: {
                 trigger: '#work',
@@ -818,6 +797,8 @@ function init() {
             e.preventDefault();
             
             const btn = form.querySelector('.submit-button');
+            if (!btn) return;
+            
             const originalText = btn.innerHTML;
             btn.innerHTML = 'Enviando...';
             btn.disabled = true;
@@ -834,21 +815,9 @@ function init() {
     }
 }
 
-// Garantir que Lenis está disponível globalmente
-window.lenis = new Lenis({
-    duration: 0.95,
-    smoothWheel: true
-});
-
-function raf(time) {
-    window.lenis.raf(time);
-    requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
 // Fallback para caso o sistema imersivo não carregue
 setTimeout(() => {
     if (!window.immersiveWorks) {
-        console.warn('⚠️ Sistema imersivo não carregou');
+        console.warn('⚠️ Sistema imersivo não iniciou - verifique o HTML');
     }
 }, 3000);
