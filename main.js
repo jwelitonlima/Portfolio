@@ -1,3 +1,279 @@
+// IMMERSIVE WORKS SYSTEM - VERSÃO SIMPLIFICADA
+class ImmersiveWorks {
+    constructor() {
+        this.currentState = 'discover';
+        this.currentProject = 0;
+        this.isTransitioning = false;
+        
+        this.init();
+    }
+
+    init() {
+        this.cacheElements();
+        this.setupEventListeners();
+        this.setupScrollTriggers();
+        this.showCurrentProject();
+    }
+
+    cacheElements() {
+        this.worksSection = document.getElementById('work');
+        this.scenes = document.querySelectorAll('.project-scene');
+        this.navigation = document.querySelector('.works-navigation');
+        this.loading = document.querySelector('.scene-loading');
+    }
+
+    setupEventListeners() {
+        // Botões Descobrir
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.discover-btn')) {
+                const projectId = e.target.closest('.discover-btn').dataset.project;
+                this.enterProjectScene(projectId);
+            }
+        });
+
+        // Botão Sair
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.exit-btn')) {
+                this.exitProjectScene();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (this.currentState === 'project' && e.key === 'Escape') {
+                this.exitProjectScene();
+            }
+        });
+
+        // Navegação por dots
+        document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+            dot.addEventListener('click', () => this.goToProject(index));
+        });
+    }
+
+    setupScrollTriggers() {
+        // Scroll entre projetos no estado discover
+        for (let index = 0; index < 4; index++) {
+            ScrollTrigger.create({
+                trigger: this.worksSection,
+                start: `top+=${index * 100}% top`,
+                end: `top+=${(index + 1) * 100}% top`,
+                onEnter: () => this.handleProjectScroll(index),
+                onEnterBack: () => this.handleProjectScroll(index)
+            });
+        }
+    }
+
+    handleProjectScroll(index) {
+        if (this.currentState === 'discover' && !this.isTransitioning) {
+            this.currentProject = index;
+            this.showCurrentProject();
+            this.updateNavigation();
+        }
+    }
+
+    showCurrentProject() {
+        const allPreviews = document.querySelectorAll('.project-preview');
+        allPreviews.forEach(preview => preview.classList.remove('active'));
+        
+        const currentPreview = document.querySelectorAll('.project-preview')[this.currentProject];
+        if (currentPreview) {
+            currentPreview.classList.add('active');
+        }
+    }
+
+    updateNavigation() {
+        const dots = this.navigation.querySelectorAll('.nav-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === this.currentProject);
+        });
+    }
+
+    async enterProjectScene(projectId) {
+        if (this.isTransitioning) return;
+        
+        this.isTransitioning = true;
+        this.currentState = 'project';
+        
+        // Mostrar loading
+        this.loading.classList.add('active');
+        
+        // Encontrar cena pelo índice
+        const projectIndex = this.getProjectIndex(projectId);
+        const scene = this.scenes[projectIndex];
+        
+        if (!scene) return;
+        
+        // Preparar transição
+        await this.prepareProjectTransition();
+        
+        // Executar animação de entrada
+        await this.executeEnterTransition(scene, projectId);
+        
+        // Configurar scroll interno da cena
+        this.setupSceneScroll(scene);
+        
+        this.isTransitioning = false;
+        this.loading.classList.remove('active');
+    }
+
+    getProjectIndex(projectId) {
+        const projects = ['aurora', 'zenith', 'sphere', 'pulse'];
+        return projects.indexOf(projectId);
+    }
+
+    async prepareProjectTransition() {
+        // Esconder elementos da página principal
+        gsap.to('header, .site-head, .works-bridge, .works-navigation', {
+            opacity: 0,
+            duration: 0.3,
+            ease: 'power2.out'
+        });
+        
+        // Mostrar botão sair COM EFEITO FLUTUANTE
+        const exitBtn = document.querySelector('.exit-btn');
+        exitBtn.classList.add('floating');
+        
+        gsap.to(exitBtn, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.4,
+            ease: 'back.out(1.7)',
+            delay: 0.5
+        });
+    }
+
+    async executeEnterTransition(scene, projectId) {
+        // Mostrar cena
+        scene.classList.add('active');
+        
+        // Aplicar transição específica
+        scene.classList.add(`${projectId}-transition-enter`);
+        
+        // Animar background
+        await gsap.to(scene.querySelector('.scene-background'), {
+            scale: 1,
+            duration: 1.2,
+            ease: 'power2.out'
+        });
+        
+        // Aguardar fim da transição
+        await new Promise(resolve => {
+            setTimeout(resolve, 1400);
+        });
+        
+        // Remover classe de transição
+        scene.classList.remove(`${projectId}-transition-enter`);
+    }
+
+    setupSceneScroll(scene) {
+        const background = scene.querySelector('.scene-background');
+        const content = scene.querySelector('.scene-content');
+        
+        // Criar scroll trigger para parallax interno
+        ScrollTrigger.create({
+            trigger: scene,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1,
+            onUpdate: (self) => {
+                const progress = self.progress;
+                
+                // Parallax do background
+                gsap.to(background, {
+                    scale: 1 + (progress * 0.1),
+                    duration: 0.1
+                });
+                
+                // Revelar conteúdo conforme scroll
+                if (progress > 0.2 && !content.classList.contains('parallax-active')) {
+                    content.classList.add('parallax-active');
+                }
+            }
+        });
+    }
+
+    async exitProjectScene() {
+        if (this.isTransitioning) return;
+        
+        this.isTransitioning = true;
+        this.currentState = 'discover';
+        
+        const scene = this.scenes[this.currentProject];
+        
+        // Esconder botão sair E REMOVER FLUTUANTE
+        const exitBtn = document.querySelector('.exit-btn');
+        exitBtn.classList.remove('floating');
+        
+        gsap.to(exitBtn, {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.3,
+            ease: 'power2.in'
+        });
+        
+        // Executar transição de saída
+        await this.executeExitTransition(scene);
+        
+        // Mostrar elementos da página principal
+        gsap.to('header, .site-head, .works-bridge, .works-navigation', {
+            opacity: 1,
+            duration: 0.4,
+            ease: 'power2.out'
+        });
+        
+        this.isTransitioning = false;
+    }
+
+    async executeExitTransition(scene) {
+        const projectId = this.getProjectId(this.currentProject);
+        
+        // Aplicar transição de saída
+        scene.classList.add(`${projectId}-transition-exit`);
+        
+        // Aguardar animação
+        await new Promise(resolve => {
+            setTimeout(resolve, 1200);
+        });
+        
+        // Resetar cena
+        scene.classList.remove('active');
+        scene.classList.remove(`${projectId}-transition-exit`);
+        
+        // Resetar elementos da cena
+        const content = scene.querySelector('.scene-content');
+        content.classList.remove('parallax-active');
+    }
+
+    getProjectId(index) {
+        const projects = ['aurora', 'zenith', 'sphere', 'pulse'];
+        return projects[index];
+    }
+
+    goToProject(index) {
+        if (this.isTransitioning || index === this.currentProject) return;
+        
+        this.currentProject = index;
+        this.showCurrentProject();
+        this.updateNavigation();
+        
+        const scrollPosition = this.worksSection.offsetTop + (window.innerHeight * index);
+        lenis.scrollTo(scrollPosition, {
+            duration: 1.5,
+            easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+        });
+    }
+}
+
+// Inicializar sistema
+function initImmersiveWorks() {
+    if (document.querySelector('.works-immersive-container')) {
+        window.immersiveWorks = new ImmersiveWorks();
+        console.log('✅ Sistema Imersivo Works inicializado - VERSÃO HTML');
+    }
+}
+
+// MAIN INIT FUNCTION (mantém todas as funções originais)
 (function ready(cb) {
     (document.readyState !== 'loading') ? cb() : document.addEventListener('DOMContentLoaded', cb);
 })(init);
@@ -45,6 +321,9 @@ function init() {
             onComplete: () => {
                 document.getElementById('preloader')?.remove();
                 console.log('✅ Preloader removido');
+                
+                // INICIALIZAR SISTEMA IMERSIVO
+                initImmersiveWorks();
             }
         });
 
@@ -56,7 +335,6 @@ function init() {
         brandAndNavHovers();
         hideHeroBackgroundOnScroll();
         worksBridgeTransition();
-        worksCarouselParallax();
         aboutZoomRevealTypography();
         floatingSkillsSystem();
         contactFooterParallax();
@@ -285,8 +563,19 @@ function init() {
                 scrub: 1.2
             }
         })
-            .to(worksTitle, { opacity: 1, duration: 0.15 }, 0)
-            .to(worksTitle, { scale: 1 }, 0);
+        .to(worksTitle, { opacity: 1, duration: 0.15 }, 0)
+        .to(worksTitle, { scale: 1 }, 0);
+
+        // MOSTRAR NAVEGAÇÃO quando Works estiver visível
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '#work',
+                start: 'top 80%',
+                end: 'top 20%',
+                scrub: 0.5
+            }
+        })
+        .to('.works-navigation', { opacity: 1, duration: 0.3 });
 
         gsap.timeline({
             scrollTrigger: {
@@ -296,223 +585,8 @@ function init() {
                 scrub: 1
             }
         })
-            .to(worksTitle, { opacity: 0, scale: 0.5, duration: 0.3 });
-    }
-    // FUNÇÃO PRINCIPAL DO CARROSSEL - TOTALMENTE CORRIGIDA
-    function worksCarouselParallax() {
-        const carousel = document.querySelector('.works-carousel');
-        const panels = gsap.utils.toArray('.works-carousel .panel');
-
-        if (!carousel || !panels.length) {
-            console.error('❌ Carrossel ou painéis não encontrados');
-            return;
-        }
-
-        console.log('🎯 Iniciando carrossel com', panels.length, 'painéis');
-
-        // Remover setas se existirem
-        const prevBtn = document.querySelector('.works-ui .prev');
-        const nextBtn = document.querySelector('.works-ui .next');
-        if (prevBtn) prevBtn.remove();
-        if (nextBtn) nextBtn.remove();
-        console.log('✅ Setas de navegação removidas');
-
-        // CORREÇÃO CRÍTICA: Garantir posição inicial
-        gsap.set(carousel, { x: 0 });
-        panels.forEach((panel, i) => {
-            gsap.set(panel, { xPercent: i * 100, x: 0 });
-        });
-
-        // Scroll horizontal livre SEM snap
-        const scrollTween = gsap.to(panels, {
-            xPercent: -100 * (panels.length - 1),
-            ease: 'none',
-            scrollTrigger: {
-                id: 'works-h',
-                trigger: '#work',
-                start: 'top top',
-                end: () => `+=${(panels.length - 1) * window.innerWidth}`,
-                scrub: 1,
-                pin: true,
-                anticipatePin: 1,
-                invalidateOnRefresh: true
-            }
-        });
-
-        console.log('✅ Carrossel configurado - Scroll livre sem snap');
-
-        // Animações parallax
-        panels.forEach((panel, i) => {
-            const bg = panel.querySelector('.panel-bg-parallax');
-            const img = panel.querySelector('img');
-            const caption = panel.querySelector('.panel-caption');
-            const title = panel.querySelector('.panel-title');
-            const meta = panel.querySelector('.panel-meta');
-
-            if (caption) {
-                gsap.set(caption, { visibility: 'visible', opacity: 1 });
-            }
-
-            if (bg) {
-                gsap.fromTo(bg, 
-                    { yPercent: -20, scale: 1.1 }, 
-                    {
-                        yPercent: 20,
-                        scale: 1.05,
-                        ease: 'none',
-                        scrollTrigger: {
-                            trigger: panel,
-                            containerAnimation: scrollTween,
-                            start: 'left right',
-                            end: 'right left',
-                            scrub: true
-                        }
-                    }
-                );
-            }
-
-            if (img) {
-                gsap.fromTo(img, 
-                    { yPercent: -15, scale: 1.08 }, 
-                    {
-                        yPercent: 15,
-                        scale: 1.02,
-                        ease: 'power1.inOut',
-                        scrollTrigger: {
-                            trigger: panel,
-                            containerAnimation: scrollTween,
-                            start: 'left right',
-                            end: 'right left',
-                            scrub: true
-                        }
-                    }
-                );
-            }
-
-            if (caption) {
-                gsap.fromTo(caption, 
-                    { y: 60, opacity: 0, scale: 0.9 }, 
-                    {
-                        y: 0,
-                        opacity: 1,
-                        scale: 1,
-                        ease: 'power2.out',
-                        scrollTrigger: {
-                            trigger: panel,
-                            containerAnimation: scrollTween,
-                            start: 'left 70%',
-                            end: 'left 30%',
-                            scrub: 1.5
-                        }
-                    }
-                );
-            }
-
-            if (title) {
-                gsap.fromTo(title, 
-                    { y: 30, opacity: 0 }, 
-                    {
-                        y: 0,
-                        opacity: 1,
-                        ease: 'power3.out',
-                        scrollTrigger: {
-                            trigger: panel,
-                            containerAnimation: scrollTween,
-                            start: 'left 70%',
-                            end: 'left 30%',
-                            scrub: 1.5
-                        }
-                    }
-                );
-            }
-
-            if (meta) {
-                gsap.fromTo(meta, 
-                    { opacity: 0, y: 10 }, 
-                    {
-                        opacity: 1,
-                        y: 0,
-                        ease: 'power2.out',
-                        scrollTrigger: {
-                            trigger: panel,
-                            containerAnimation: scrollTween,
-                            start: 'left 60%',
-                            end: 'left 30%',
-                            scrub: 1.5
-                        }
-                    }
-                );
-            }
-        });
-
-        // DOTS de navegação
-        const dotsWrap = document.querySelector('.works-ui .dots');
-
-        if (dotsWrap) {
-            dotsWrap.innerHTML = '';
-            
-            panels.forEach((_, idx) => {
-                const dot = document.createElement('button');
-                dot.className = 'dot';
-                dot.type = 'button';
-                dot.setAttribute('aria-label', `Ir ao projeto ${idx + 1}`);
-                dot.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
-                dotsWrap.appendChild(dot);
-            });
-
-            const dots = Array.from(dotsWrap.querySelectorAll('.dot'));
-
-            function updateDots(progress) {
-                const activeIndex = Math.round(progress * (panels.length - 1));
-                console.log(`🎯 Navegando para projeto ${activeIndex + 1} - Progress: ${progress.toFixed(2)}`);
-                
-                dots.forEach((dot, index) => {
-                    const isActive = index === activeIndex;
-                    dot.classList.toggle('is-active', isActive);
-                    dot.setAttribute('aria-selected', String(isActive));
-                    
-                    gsap.to(dot, {
-                        scale: isActive ? 1.3 : 0.9,
-                        duration: 0.4,
-                        ease: 'power2.out'
-                    });
-                });
-            }
-
-            updateDots(0);
-
-            ScrollTrigger.create({
-                trigger: '#work',
-                start: 'top top',
-                end: () => `+=${(panels.length - 1) * window.innerWidth}`,
-                onUpdate: (self) => {
-                    updateDots(self.progress);
-                }
-            });
-
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    const targetProgress = index / (panels.length - 1);
-                    const st = ScrollTrigger.getById('works-h');
-                    
-                    if (st) {
-                        const scrollPos = st.start + ((st.end - st.start) * targetProgress);
-                        
-                        gsap.to(dot, {
-                            scale: 1.5,
-                            duration: 0.1,
-                            yoyo: true,
-                            repeat: 1
-                        });
-
-                        lenis.scrollTo(scrollPos, {
-                            duration: 1.5,
-                            easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
-                        });
-                    }
-                });
-            });
-        }
+        .to(worksTitle, { opacity: 0, scale: 0.5, duration: 0.3 })
+        .to('.works-navigation', { opacity: 0, duration: 0.3 }, 0);
     }
 
     function aboutZoomRevealTypography() {
@@ -759,3 +833,22 @@ function init() {
         });
     }
 }
+
+// Garantir que Lenis está disponível globalmente
+window.lenis = new Lenis({
+    duration: 0.95,
+    smoothWheel: true
+});
+
+function raf(time) {
+    window.lenis.raf(time);
+    requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// Fallback para caso o sistema imersivo não carregue
+setTimeout(() => {
+    if (!window.immersiveWorks) {
+        console.warn('⚠️ Sistema imersivo não carregou');
+    }
+}, 3000);
