@@ -20,7 +20,6 @@
         <span class="hello-dot" aria-hidden="true"></span>
       </div>
     </div>
-
     <!-- Header -->
     <header class="site-head">
       <a class="brand-badge font-ppnm" href="#" data-swap="Weliton Lima">© Weliton Lima</a>
@@ -35,7 +34,6 @@
         <span class="bar bar-3"></span>
       </button>
     </header>
-
     <!-- Drawer -->
     <aside id="drawer" class="drawer font-ppnm" aria-hidden="true">
       <div class="drawer-header">
@@ -57,11 +55,11 @@
         </div>
       </div>
     </aside>
-
     <main>
       <!-- HERO -->
       <section class="hero" id="home">
-        <img class="hero-bg-photo" src="assets/7fe85f5d-afac-40bc-bb2a-a96218c2ad45.jpg" alt="Foto de Weliton Lima" aria-hidden="true" />
+        <!-- --------- Caminho Corrigido ---------- -->
+        <img class="hero-bg-photo" src="assets/img/hero.jpg" alt="Foto de Weliton Lima" aria-hidden="true" />
         <div class="hero-bg-overlay"></div>
         <div class="name-wrapper">
           <h1 class="name-giant" id="heroName" aria-label="Weliton Lima">
@@ -80,65 +78,196 @@
           </div>
         </div>
       </section>
-
       <!-- Ponte Works -->
       <div class="works-bridge" aria-hidden="true">
         <h2 id="worksTitle" class="works-giant font-ppnm">Works</h2>
       </div>
-
-      <!-- Works -->
+      <!-- WORKS SECTION IMERSIVA -->
       <section id="work" class="section-reveal projects-section">
         <div class="section-content">
           <h2 class="font-ppnm sr-only">Works</h2>
         </div>
-        <div class="works-carousel" aria-label="Projetos">
-          <article class="panel" data-project="Aurora">
-            <div class="panel-bg-parallax"></div>
-            <figure class="panel-media">
-              <img src="assets/projeto1.jpg" alt="Projeto Aurora" />
-            </figure>
-            <div class="panel-caption">
-              <h3 class="panel-title font-ppnm">Project Aurora</h3>
-              <p class="panel-meta">Web · 2025</p>
+        <!-- Container Principal Imersivo -->
+        <div class="works-immersive-container">
+          <!-- Estado Discover - Preview dos Projetos -->
+          <div class="works-discover-state">
+            <!-- Projeto 1 - Aurora -->
+            <div class="project-preview active" data-project="aurora">
+              <div class="project-preview-content">
+                <h3 class="project-preview-title">Foro Estudantil</h3>
+                <p class="project-preview-meta">HTML, CSS, JS, PHP, MySQL</p>
+                <button class="discover-btn" data-project="aurora">
+                  <span>Descobrir</span>
+                  <div class="btn-arrow">↘</div>
+                </button>
+              </div>
             </div>
-          </article>
-          <article class="panel" data-project="Zenith">
-            <div class="panel-bg-parallax"></div>
-            <figure class="panel-media">
-              <img src="assets/projeto2.jpg" alt="Projeto Zenith" />
-            </figure>
-            <div class="panel-caption">
-              <h3 class="panel-title font-ppnm">Project Zenith</h3>
-              <p class="panel-meta">UI · 2025</p>
+            <!-- Projeto 2 - Zenith -->
+            <div class="project-preview" data-project="zenith">
+              <div class="project-preview-content">
+                <h3 class="project-preview-title">E-Commerce Platform</h3>
+                <p class="project-preview-meta">React, Node.js, MongoDB, Stripe</p>
+                <button class="discover-btn" data-project="zenith">
+                  <span>Descobrir</span>
+                  <div class="btn-arrow">↘</div>
+                </button>
+              </div>
             </div>
-          </article>
-          <article class="panel" data-project="Sphere">
-            <div class="panel-bg-parallax"></div>
-            <figure class="panel-media">
-              <img src="assets/projeto3.jpg" alt="Projeto Sphere" />
-            </figure>
-            <div class="panel-caption">
-              <h3 class="panel-title font-ppnm">Project Sphere</h3>
-              <p class="panel-meta">Brand · 2025</p>
+            <!-- Projeto 3 - Sphere -->
+            <div class="project-preview" data-project="sphere">
+              <div class="project-preview-content">
+                <h3 class="project-preview-title">Brand Identity System</h3>
+                <p class="project-preview-meta">Figma, Illustrator, After Effects</p>
+                <button class="discover-btn" data-project="sphere">
+                  <span>Descobrir</span>
+                  <div class="btn-arrow">↘</div>
+                </button>
+              </div>
             </div>
-          </article>
-          <article class="panel" data-project="Pulse">
-            <div class="panel-bg-parallax"></div>
-            <figure class="panel-media">
-              <img src="assets/projeto4.jpg" alt="Projeto Pulse" />
-            </figure>
-            <div class="panel-caption">
-              <h3 class="panel-title font-ppnm">Project Pulse</h3>
-              <p class="panel-meta">Motion · 2025</p>
+            <!-- Projeto 4 - Pulse -->
+            <div class="project-preview" data-project="pulse">
+              <div class="project-preview-content">
+                <h3 class="project-preview-title">Mobile Fitness App</h3>
+                <p class="project-preview-meta">React Native, Firebase, HealthKit</p>
+                <button class="discover-btn" data-project="pulse">
+                  <span>Descobrir</span>
+                  <div class="btn-arrow">↘</div>
+                </button>
+              </div>
             </div>
-          </article>
+          </div>
+
+          <!-- Container das Cenas dos Projetos -->
+          <div class="project-scenes-container">
+            <!-- PROJETO 1 - FORO ESTUDANTIL -->
+            <div class="project-scene aurora-scene">
+              <div class="scene-container">
+                <div class="scene-background" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                <div class="scene-content">
+                  <!-- Imagem Principal Hero -->
+                  <div class="aurora-main-hero">
+                    <img src="assets/img/foro-estudantil1.png" alt="Foro Estudantil - Página Principal" />
+                  </div>
+                  <!-- Conteúdo Blog Estilo Cartier -->
+                  <div class="aurora-blog-content">
+                    <h2 class="aurora-blog-title">Foro Estudantil: Revolucionando a Educação Digital</h2>
+                    <div class="aurora-blog-text">
+                      <p>Uma plataforma educacional completa desenvolvida para conectar estudantes 
+                      e facilitar o compartilhamento de conhecimento em tempo real. O sistema 
+                      incorpora tecnologias modernas com foco na experiência do usuário.</p>
+                      <p>Desenvolvido com <strong>PHP nativo</strong> para performance, 
+                      <strong>MySQL</strong> para gestão de dados, e <strong>JavaScript</strong> 
+                      para interatividade. A interface foi cuidadosamente planejada no 
+                      <strong>Figma</strong> antes da implementação.</p>
+                      <p><strong>Recursos principais:</strong> Sistema de autenticação seguro, 
+                      fórum dinâmico com threads, painel administrativo completo, 
+                      upload de arquivos, e notificações em tempo real.</p>
+                    </div>
+                    <div class="scene-tech">
+                      <span class="tech-badge">HTML, CSS, JS, PHP, MySQL</span>
+                    </div>
+                  </div>
+                  <!-- Galeria Parallax -->
+                  <div class="aurora-gallery">
+                    <div class="aurora-gallery-item">
+                      <img src="assets/img/foro-estudantil2.png" alt="Sistema de Login - Foro Estudantil" />
+                    </div>
+                    <div class="aurora-gallery-item">
+                      <img src="assets/img/foro-estudantil3.png" alt="Cadastro de Usuários - Foro Estudantil" />
+                    </div>
+                    <div class="aurora-gallery-item">
+                      <img src="assets/img/foro-estudantil1.png" alt="Interface Principal - Foro Estudantil" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- PROJETO 2 - E-COMMERCE -->
+            <div class="project-scene zenith-scene">
+              <div class="scene-container">
+                <div class="scene-background" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                <div class="scene-content">
+                  <div class="scene-main-image">
+                    <img src="assets/img/bank-slip.png" alt="E-Commerce Platform" />
+                  </div>
+                  <div class="scene-description">
+                    <h2 class="scene-title">E-Commerce Platform</h2>
+                    <p class="scene-text">Plataforma de e-commerce premium com sistema de pagamentos integrado, gestão de inventário em tempo real e experiência de usuário otimizada para conversão.</p>
+                    <div class="scene-tech">
+                      <span class="tech-badge">React, Node.js, MongoDB, Stripe</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- PROJETO 3 - BRAND IDENTITY -->
+            <div class="project-scene sphere-scene">
+              <div class="scene-container">
+                <div class="scene-background" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                <div class="scene-content">
+                  <div class="scene-main-image">
+                    <img src="assets/img/home3_fabio_arq.png" alt="Brand Identity System" />
+                  </div>
+                  <div class="scene-description">
+                    <h2 class="scene-title">Brand Identity System</h2>
+                    <p class="scene-text">Sistema completo de identidade visual para marca de luxo, incluindo guidelines de marca, motion design e aplicações em diversas mídias.</p>
+                    <div class="scene-tech">
+                      <span class="tech-badge">Figma, Illustrator, After Effects</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- PROJETO 4 - FITNESS APP -->
+            <div class="project-scene pulse-scene">
+              <div class="scene-container">
+                <div class="scene-background" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+                <div class="scene-content">
+                  <div class="scene-main-image">
+                    <img src="assets/img/kleby-almeida.png" alt="Mobile Fitness App" />
+                  </div>
+                  <div class="scene-description">
+                    <h2 class="scene-title">Mobile Fitness App</h2>
+                    <p class="scene-text">Aplicativo de fitness com tracking em tempo real, planos de treino personalizados e integração com wearables para uma experiência de saúde completa.</p>
+                    <div class="scene-tech">
+                      <span class="tech-badge">React Native, Firebase, HealthKit</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="works-ui">
-          <button class="nav prev" type="button" aria-label="Projeto anterior">←</button>
-          <div class="dots" role="tablist" aria-label="Projetos"></div>
-          <button class="nav next" type="button" aria-label="Próximo projeto">→</button>
+        <!-- Navegação entre Projetos -->
+        <div class="works-navigation">
+          <button class="nav-dot active" aria-label="Ir para projeto 1"></button>
+          <button class="nav-dot" aria-label="Ir para projeto 2"></button>
+          <button class="nav-dot" aria-label="Ir para projeto 3"></button>
+          <button class="nav-dot" aria-label="Ir para projeto 4"></button>
+        </div>
+        <!-- Botão Sair (fixo) -->
+        <button class="exit-btn" aria-label="Sair do projeto">
+          <span>×</span>
+        </button>
+        <!-- Loading entre Transições -->
+        <div class="scene-loading">
+          <div class="loading-spinner"></div>
+          <div class="loading-text">Carregando Experiência...</div>
         </div>
       </section>
+
+      <!-- ABOUT - ZOOM REVEAL TYPOGRAPHY ... -->
+      <!-- (continue o resto do seu código original mantendo sempre a troca dos caminhos das imagens) -->
+
+      <!-- SCRIPTS -->
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
+      <script src="main.js"></script>
+    </main>
+  </body>
+</html>
+
 
       <!-- ABOUT - ZOOM REVEAL TYPOGRAPHY COM CURSOR FOLLOWER -->
       <section id="about" class="about-zoom-reveal">
