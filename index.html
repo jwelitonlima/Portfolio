@@ -21,33 +21,35 @@
       </div>
     </div>
 
-    <!-- Header -->
-    <header class="site-head">
-      <a class="brand-badge font-ppnm" href="#home" data-swap="Weliton Lima">© Weliton Lima</a>
-      <nav class="top-nav font-ppnm" aria-label="Primary">
-        <!-- CORREÇÃO: Renomeado classe para evitar conflito -->
-        <a class="nav-link" href="#work">
-          Work
-          <span class="nav-link-dot" aria-hidden="true"></span>
-        </a>
-        <a class="nav-link" href="#about">
-          About
-          <span class="nav-link-dot" aria-hidden="true"></span>
-        </a>
-        <a class="nav-link" href="#contact">
-          Contact
-          <span class="nav-link-dot" aria-hidden="true"></span>
-        </a>
-      </nav>
-      <button id="hamburger" class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
-        <span class="bar bar-1"></span>
-        <span class="bar bar-2"></span>
-        <span class="bar bar-3"></span>
-      </button>
-    </header>
+  <!-- Header -->
+<header class="site-head">
+  <a class="brand-badge font-ppnm" href="#home" data-swap="Weliton Lima">© Weliton Lima</a>
+  <nav class="top-nav font-ppnm" aria-label="Primary">
+    <a class="nav-link" href="#work">
+      Work
+      <span class="nav-link-dot" aria-hidden="true"></span>
+    </a>
+    <a class="nav-link" href="#about">
+      About
+      <span class="nav-link-dot" aria-hidden="true"></span>
+    </a>
+    <a class="nav-link" href="#contact">
+      Contact
+      <span class="nav-link-dot" aria-hidden="true"></span>
+    </a>
+  </nav>
+</header>
 
-    <!-- Drawer -->
-    <aside id="drawer" class="drawer font-ppnm" aria-hidden="true">
+<!-- Menu Flutuante (FORA DO HEADER) -->
+<button id="hamburger" class="floating-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
+  <span class="menu-line menu-line-1"></span>
+  <span class="menu-line menu-line-2"></span>
+  <span class="menu-line menu-line-3"></span>
+</button>
+
+<!-- Drawer -->
+<aside id="drawer" class="drawer font-ppnm" aria-hidden="true">
+
       <div class="drawer-header">
         <span class="drawer-label">NAVIGATION</span>
       </div>
@@ -60,7 +62,6 @@
       <div class="drawer-footer">
         <span class="socials-label">SOCIALS</span>
         <div class="socials-links">
-          <!-- CORREÇÃO: Adicionar links reais ou remover rel="nofollow" -->
           <a href="https://awwwards.com" target="_blank" rel="noopener noreferrer">Awwwards</a>
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
@@ -72,7 +73,7 @@
     <main>
       <!-- HERO -->
       <section class="hero" id="home">
-        <img class="hero-bg-photo" src="assets/img/hero.jpg" alt="Foto de Weliton Lima" aria-hidden="true" />
+        <img class="hero-bg-photo" src="assets/8bde7749-314d-42ce-842c-1711b3538255.jpeg" alt="Foto de Weliton Lima" aria-hidden="true" />
         <div class="hero-bg-overlay"></div>
         <div class="name-wrapper">
           <h1 class="name-giant" id="heroName" aria-label="Weliton Lima">
@@ -97,79 +98,48 @@
         <h2 id="worksTitle" class="works-giant font-ppnm">Works</h2>
       </div>
 
-      <!-- WORKS SECTION IMERSIVA -->
-      <section id="work" class="section-reveal projects-section">
-        <div class="section-content">
-          <h2 class="font-ppnm sr-only">Works</h2>
+      <!-- WORKS SECTION -->
+<section id="work" class="section-reveal projects-section">
+  <div class="section-content">
+    <h2 class="font-ppnm sr-only">Works</h2>
+  </div>
+
+  <div class="works-immersive-container">
+    <div class="works-discover-state">
+
+      <!-- Projeto 1 - Foro Estudantil (ATIVO) -->
+      <div class="project-preview active" data-project="foro-estudantil" id="foro-estudantil">
+        <div class="project-preview-content">
+          <h3 class="project-preview-title">Foro Estudantil</h3>
+          <p class="project-preview-meta">HTML, CSS, JS, PHP, MySQL</p>
+          <a href="foro-estudantil.html" class="discover-btn">
+            <span>Descobrir</span>
+            <div class="btn-arrow">↘</div>
+          </a>
         </div>
+      </div>
 
-        <!-- Container Principal Imersivo -->
-        <div class="works-immersive-container">
-          <!-- Estado Discover - Preview dos Projetos -->
-          <div class="works-discover-state">
-            
-            <!-- Projeto 1 - Foro Estudantil -->
-            <div class="project-preview active" data-project="foro-estudantil" id="foro-estudantil">
-              <div class="project-preview-content">
-                <h3 class="project-preview-title">Foro Estudantil</h3>
-                <p class="project-preview-meta">HTML, CSS, JS, PHP, MySQL</p>
-                <a href="foro-estudantil.html" class="discover-btn">
-                  <span>Descobrir</span>
-                  <div class="btn-arrow">↘</div>
-                </a>
-              </div>
-            </div>
+      <!-- COMENTADOS TEMPORARIAMENTE
+      <div class="project-preview" data-project="zenith" id="zenith">
+        ...
+      </div>
+      <div class="project-preview" data-project="sphere" id="sphere">
+        ...
+      </div>
+      <div class="project-preview" data-project="pulse" id="pulse">
+        ...
+      </div>
+      -->
 
-            <!-- Projeto 2 - Zenith -->
-            <div class="project-preview" data-project="zenith" id="zenith">
-              <div class="project-preview-content">
-                <h3 class="project-preview-title">E-Commerce Platform</h3>
-                <p class="project-preview-meta">React, Node.js, MongoDB, Stripe</p>
-                <!-- CORREÇÃO: Adicionar página ou manter # com data-attribute -->
-                <a href="zenith.html" class="discover-btn" data-disabled="true">
-                  <span>Em breve</span>
-                  <div class="btn-arrow">↘</div>
-                </a>
-              </div>
-            </div>
+    </div>
+  </div>
 
-            <!-- Projeto 3 - Sphere -->
-            <div class="project-preview" data-project="sphere" id="sphere">
-              <div class="project-preview-content">
-                <h3 class="project-preview-title">Brand Identity System</h3>
-                <p class="project-preview-meta">Figma, Illustrator, After Effects</p>
-                <a href="sphere.html" class="discover-btn" data-disabled="true">
-                  <span>Em breve</span>
-                  <div class="btn-arrow">↘</div>
-                </a>
-              </div>
-            </div>
+  <!-- Navegação removida (pode deletar este bloco) -->
+  <!-- <nav class="works-navigation" ...></nav> -->
+</section>
 
-            <!-- Projeto 4 - Pulse -->
-            <div class="project-preview" data-project="pulse" id="pulse">
-              <div class="project-preview-content">
-                <h3 class="project-preview-title">Mobile Fitness App</h3>
-                <p class="project-preview-meta">React Native, Firebase, HealthKit</p>
-                <a href="pulse.html" class="discover-btn" data-disabled="true">
-                  <span>Em breve</span>
-                  <div class="btn-arrow">↘</div>
-                </a>
-              </div>
-            </div>
 
-          </div>
-        </div>
-
-        <!-- CORREÇÃO: Navegação entre Projetos com IDs únicos -->
-        <nav class="works-navigation" aria-label="Navegação de Projetos">
-          <button class="project-nav-dot active" data-project-index="0" aria-label="Ir para projeto 1" aria-current="true"></button>
-          <button class="project-nav-dot" data-project-index="1" aria-label="Ir para projeto 2"></button>
-          <button class="project-nav-dot" data-project-index="2" aria-label="Ir para projeto 3"></button>
-          <button class="project-nav-dot" data-project-index="3" aria-label="Ir para projeto 4"></button>
-        </nav>
-      </section>
-
-      <!-- ABOUT - ZOOM REVEAL TYPOGRAPHY COM CURSOR FOLLOWER -->
+      <!-- ABOUT -->
       <section id="about" class="about-zoom-reveal">
         <div class="about-container">
           <div class="about-intro">
@@ -243,12 +213,9 @@
             </blockquote>
           </div>
         </div>
-
-        <!-- Floating Skills Cards Container -->
-        <div id="floatingSkills" class="floating-skills-container"></div>
       </section>
 
-      <!-- CONTACT - FOOTER PARALLAX PREMIUM -->
+      <!-- CONTACT -->
       <section id="contact" class="contact-footer-parallax">
         <div class="contact-container">
           <div class="contact-headline">
@@ -301,7 +268,6 @@
       </section>
     </main>
 
-    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
