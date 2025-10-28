@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works · Weliton Lima</title>
+    
+    <!-- Icon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💼</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com">
+    <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.10/dist/lenis.css">
+    
+    <style>
+        /* ========== PROJECTS PAGE PREMIUM STYLES ========== */
+        
+        :root {
+            --project-padding: clamp(80px, 12vh, 140px);
+        }
+        
+        body {
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section com Animação Premium */
+        .projects-hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 40px 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Background Gradient Animado */
+        .projects-hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.5; }
+        }
+        
+        .projects-hero-title {
+            font-size: clamp(80px, 15vw, 200px);
+            font-weight: 900;
+            line-height: 0.85;
+            letter-spacing: -0.04em;
+            color: var(--ink-strong);
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 2;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .projects-hero-subtitle {
+            font-size: clamp(16px, 2.5vw, 24px);
+            color: var(--ink);
+            opacity: 0.7;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+        }
+        
+        /* Projects Container */
+        .projects-container {
+            position: relative;
+            background: var(--bg);
+        }
+        
+        /* Individual Project Showcase */
+        .project-showcase {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--project-padding) 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-showcase:nth-child(even) {
+            background: linear-gradient(180deg, var(--bg) 0%, var(--dark) 50%, var(--bg) 100%);
+        }
+        
+        /* Parallax Background Elements */
+        .project-bg-element {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.12;
+            pointer-events: none;
+            will-change: transform;
+        }
+        
+        .bg-element-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%);
+            top: -200px;
+            right: -150px;
+        }
+        
+        .bg-element-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+        }
+        
+        /* Project Content Layout */
+        .project-content {
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Alternar layout */
+        .project-showcase:nth-child(even) .project-content {
+            grid-template-columns: 1.2fr 1fr;
+        }
+        
+        .project-showcase:nth-child(even) .project-info {
+            order: 2;
+        }
+        
+        .project-showcase:nth-child(even) .project-visual {
+            order: 1;
+        }
+        
+        /* Project Info */
+        .project-info {
+            padding: 20px;
+        }
+        
+        .project-number {
+            font-size: clamp(14px, 1.5vw, 18px);
+            color: var(--ink);
+            opacity: 0.5;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            font-weight: 500;
+            font-family: 'PP Neue Montreal', sans-serif;
+        }
+        
+        .project-title {
+            font-size: clamp(56px, 8vw, 110px);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            color: var(--ink-strong);
+            margin: 0 0 20px 0;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .project-category {
+            font-size: clamp(16px, 2vw, 22px);
+            color: var(--ink);
+            opacity: 0.7;
+            margin-bottom: 40px;
+            letter-spacing: 0.05em;
+            font-family: 'PP Neue Montreal', sans-serif;
+        }
+        
+        .project-description {
+            font-size: clamp(16px, 1.8vw, 20px);
+            line-height: 1.7;
+            color: var(--ink);
+            opacity: 0.85;
+            margin-bottom: 48px;
+            max-width: 540px;
+            font-family: 'PP Neue Montreal', sans-serif;
+        }
+        
+        /* Tech Stack Badges */
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+        
+        .tech-badge {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 100px;
+            font-size: clamp(13px, 1.5vw, 15px);
+            color: var(--ink);
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.16, 0.61, 0.46, 1);
+            font-family: 'PP Neue Montreal', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .tech-badge:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+            border-color: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+        
+        .tech-badge:hover::before {
+            left: 100%;
+        }
+        
+        /* CTA Button Premium */
+        .project-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 48px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            color: var(--ink-strong);
+            font-size: clamp(15px, 1.8vw, 18px);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 0.61, 0.46, 1);
+            letter-spacing: 0.02em;
+            position: relative;
+            overflow: hidden;
+            font-family: 'PP Neue Montreal', sans-serif;
+        }
+        
+        .project-cta-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.09));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .project-cta-btn:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        
+        .project-cta-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .project-cta-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-icon {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .project-cta-btn:hover .btn-icon {
+            transform: translate(4px, -4px);
+        }
+        
+        /* Laptop Mockup Premium */
+        .project-visual {
+            padding: 20px;
+            perspective: 2000px;
+        }
+        
+        .laptop-mockup {
+            width: 100%;
+            max-width: 750px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.16, 0.61, 0.46, 1);
+            will-change: transform;
+        }
+        
+        .laptop-screen {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            background: #000;
+            border-radius: 14px 14px 0 0;
+            border: 12px solid #0d0d0d;
+            border-bottom: 0;
+            overflow: hidden;
+            box-shadow: 
+                0 -4px 12px rgba(255,255,255,0.08) inset,
+                0 25px 70px rgba(0,0,0,0.65);
+        }
+        
+        /* Webcam Notch */
+        .laptop-screen::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: #222;
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 0 0 8px rgba(0,0,0,0.8);
+        }
+        
+        /* Screen Content */
+        .screen-content {
+            position: absolute;
+            inset: 0;
+            background: #000;
+            overflow: hidden;
+        }
+        
+        .project-video,
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Screen Reflection Effect */
+        .screen-reflection {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255,255,255,0.12) 0%,
+                transparent 35%,
+                transparent 65%,
+                rgba(255,255,255,0.06) 100%
+            );
+            pointer-events: none;
+            opacity: 0.25;
+            mix-blend-mode: overlay;
+        }
+        
+        /* Laptop Base */
+        .laptop-bottom {
+            height: 28px;
+            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+            border-radius: 0 0 18px 18px;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+        
+        .laptop-bottom::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 55px;
+            height: 4px;
+            background: #2a2a2a;
+            border-radius: 2px;
+        }
+        
+        /* Final CTA Section */
+        .projects-final-cta {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, var(--dark) 0%, var(--bg) 100%);
+            padding: var(--project-padding) 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .final-cta-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .final-cta-title {
+            font-size: clamp(56px, 10vw, 120px);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            color: var(--ink-strong);
+            margin: 0 0 32px 0;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .final-cta-subtitle {
+            font-size: clamp(16px, 2vw, 22px);
+            color: var(--ink);
+            opacity: 0.8;
+            line-height: 1.6;
+            margin: 0 0 48px 0;
+            font-family: 'PP Neue Montreal', sans-serif;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .project-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .project-showcase:nth-child(even) .project-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-showcase:nth-child(even) .project-info,
+            .project-showcase:nth-child(even) .project-visual {
+                order: initial;
+            }
+            
+            .project-info {
+                text-align: center;
+            }
+            
+            .project-description,
+            .project-tech {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .projects-hero {
+                min-height: 70vh;
+                padding: 120px 20px 80px;
+            }
+            
+            .project-showcase {
+                padding: 80px 20px;
+            }
+            
+            .project-content {
+                gap: 40px;
+            }
+            
+            .laptop-screen {
+                border-width: 8px;
+                border-radius: 10px 10px 0 0;
+            }
+            
+            .laptop-bottom {
+                height: 22px;
+                border-radius: 0 0 14px 14px;
+            }
+            
+            .projects-final-cta {
+                padding: 100px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .project-showcase {
+                padding: 60px 16px;
+            }
+            
+            .project-tech {
+                gap: 8px;
+            }
+            
+            .tech-badge {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            .laptop-screen {
+                border-width: 6px;
+                border-radius: 8px 8px 0 0;
+            }
+            
+            .laptop-bottom {
+                height: 18px;
+                border-radius: 0 0 12px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-head">
+        <a class="brand-badge font-ppnm" href="index.html" data-swap="Weliton Lima">Weliton Lima</a>
+        <nav class="top-nav font-ppnm" aria-label="Primary">
+            <a class="nav-link" href="index.html#work">
+                Work
+                <span class="nav-link-dot" aria-hidden="true"></span>
+            </a>
+            <a class="nav-link" href="index.html#about">
+                About
+                <span class="nav-link-dot" aria-hidden="true"></span>
+            </a>
+            <a class="nav-link" href="index.html#contact">
+                Contact
+                <span class="nav-link-dot" aria-hidden="true"></span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Menu Flutuante -->
+    <button id="hamburger" class="floating-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
+        <span class="menu-line menu-line-1"></span>
+        <span class="menu-line menu-line-2"></span>
+        <span class="menu-line menu-line-3"></span>
+    </button>
+
+    <!-- Drawer -->
+    <aside id="drawer" class="drawer font-ppnm" aria-hidden="true">
+        <div class="drawer-header">
+            <span class="drawer-label">NAVIGATION</span>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html">Home</a>
+            <a href="projects.html">Work</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+        <div class="drawer-footer">
+            <span class="socials-label">SOCIALS</span>
+            <div class="socials-links">
+                <a href="https://awwwards.com" target="_blank" rel="noopener noreferrer">Awwwards</a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <!-- Hero -->
+        <section class="projects-hero">
+            <h1 class="projects-hero-title">Works</h1>
+            <p class="projects-hero-subtitle">Selected Projects · 2024</p>
+        </section>
+
+        <!-- Projects Container -->
+        <div class="projects-container">
+            
+            <!-- PROJETO 1: Foro Estudantil -->
+            <section class="project-showcase" data-project="1">
+                <div class="project-bg-element bg-element-1"></div>
+                <div class="project-bg-element bg-element-2"></div>
+                
+                <div class="project-content">
+                    <div class="project-info">
+                        <p class="project-number">01</p>
+                        <h2 class="project-title">Foro<br>Estudantil</h2>
+                        <p class="project-category">Plataforma Educacional · 2024</p>
+                        <p class="project-description">
+                            Uma plataforma educacional completa desenvolvida para conectar estudantes e facilitar o compartilhamento de conhecimento em tempo real.
+                        </p>
+                        
+                        <div class="project-tech">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">PHP</span>
+                            <span class="tech-badge">MySQL</span>
+                        </div>
+                        
+                        <a href="projec-detail.html" class="project-cta-btn">
+                            <span>Explorar Projeto</span>
+                            <span class="btn-icon">→</span>
+                        </a>
+                    </div>
+                    
+                    <div class="project-visual">
+                        <div class="laptop-mockup">
+                            <div class="laptop-screen">
+                                <div class="screen-content">
+                                    <img src="assets/58f9d3235466787.Y3JvcCw2NjU5LDUyMDksMTQ4LDA.png" alt="Foro Estudantil" class="project-image" loading="lazy">
+                                </div>
+                                <div class="screen-reflection"></div>
+                            </div>
+                            <div class="laptop-bottom"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROJETO 2 -->
+            <section class="project-showcase" data-project="2">
+                <div class="project-bg-element bg-element-1"></div>
+                <div class="project-bg-element bg-element-2"></div>
+                
+                <div class="project-content">
+                    <div class="project-info">
+                        <p class="project-number">02</p>
+                        <h2 class="project-title">E-Commerce<br>Platform</h2>
+                        <p class="project-category">Plataforma de Vendas · 2024</p>
+                        <p class="project-description">
+                            Plataforma e-commerce moderna com design minimalista, checkout otimizado e experiência de compra fluida para maximizar conversões.
+                        </p>
+                        
+                        <div class="project-tech">
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">Next.js</span>
+                            <span class="tech-badge">TypeScript</span>
+                            <span class="tech-badge">Node.js</span>
+                            <span class="tech-badge">Stripe</span>
+                        </div>
+                        
+                        <a href="#" class="project-cta-btn">
+                            <span>Em Breve</span>
+                            <span class="btn-icon">→</span>
+                        </a>
+                    </div>
+                    
+                    <div class="project-visual">
+                        <div class="laptop-mockup">
+                            <div class="laptop-screen">
+                                <div class="screen-content" style="background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);">
+                                    <!-- Placeholder - adicione sua imagem aqui -->
+                                </div>
+                                <div class="screen-reflection"></div>
+                            </div>
+                            <div class="laptop-bottom"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROJETO 3 -->
+            <section class="project-showcase" data-project="3">
+                <div class="project-bg-element bg-element-1"></div>
+                <div class="project-bg-element bg-element-2"></div>
+                
+                <div class="project-content">
+                    <div class="project-info">
+                        <p class="project-number">03</p>
+                        <h2 class="project-title">Brand<br>Identity</h2>
+                        <p class="project-category">Design de Marca · 2024</p>
+                        <p class="project-description">
+                            Identidade visual completa para startup de tecnologia, incluindo logotipo, paleta de cores, tipografia e sistema de design.
+                        </p>
+                        
+                        <div class="project-tech">
+                            <span class="tech-badge">Figma</span>
+                            <span class="tech-badge">Illustrator</span>
+                            <span class="tech-badge">Photoshop</span>
+                            <span class="tech-badge">After Effects</span>
+                        </div>
+                        
+                        <a href="#" class="project-cta-btn">
+                            <span>Em Breve</span>
+                            <span class="btn-icon">→</span>
+                        </a>
+                    </div>
+                    
+                    <div class="project-visual">
+                        <div class="laptop-mockup">
+                            <div class="laptop-screen">
+                                <div class="screen-content" style="background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);">
+                                    <!-- Placeholder - adicione sua imagem aqui -->
+                                </div>
+                                <div class="screen-reflection"></div>
+                            </div>
+                            <div class="laptop-bottom"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Final CTA -->
+        <section class="projects-final-cta">
+            <div class="final-cta-content">
+                <h2 class="final-cta-title">Let's Work<br>Together</h2>
+                <p class="final-cta-subtitle">
+                    Pronto para criar algo extraordinário? Entre em contato para discutir seu próximo projeto.
+                </p>
+                <a href="index.html#contact" class="project-cta-btn">
+                    <span>Iniciar Projeto</span>
+                    <span class="btn-icon">→</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
+    
+    <script>
+        // ========== INICIALIZAÇÃO ==========
+        
+        console.log('🚀 Projects Page - Premium Experience Loading...');
+        
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            smoothTouch: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Setup
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Atualizar ScrollTrigger com Lenis
+        lenis.on('scroll', ScrollTrigger.update);
+
+        // ========== ANIMAÇÕES PREMIUM ==========
+
+        // Hero Animation
+        gsap.from('.projects-hero-title', {
+            y: 120,
+            opacity: 0,
+            scale: 0.9,
+            duration: 1.6,
+            ease: 'power4.out',
+            delay: 0.2
+        });
+
+        gsap.from('.projects-hero-subtitle', {
+            y: 60,
+            opacity: 0,
+            duration: 1.3,
+            ease: 'power3.out',
+            delay: 0.5
+        });
+
+        // Project Showcases com Parallax Premium
+        gsap.utils.toArray('.project-showcase').forEach((section, index) => {
+            const info = section.querySelector('.project-info');
+            const visual = section.querySelector('.project-visual');
+            const bgElements = section.querySelectorAll('.project-bg-element');
+            const isEven = index % 2 === 0;
+            
+            // Animação de entrada das informações
+            gsap.from(section.querySelector('.project-number'), {
+                opacity: 0,
+                y: -20,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 75%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            gsap.from(section.querySelector('.project-title'), {
+                x: isEven ? -80 : 80,
+                opacity: 0,
+                duration: 1.2,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 70%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            gsap.from(section.querySelector('.project-category'), {
+                x: isEven ? -60 : 60,
+                opacity: 0,
+                duration: 1,
+                delay: 0.15,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 70%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            gsap.from(section.querySelector('.project-description'), {
+                y: 40,
+                opacity: 0,
+                duration: 1,
+                delay: 0.3,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 70%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            // Animação dos badges
+            gsap.from(section.querySelectorAll('.tech-badge'), {
+                scale: 0,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.08,
+                ease: 'back.out(1.7)',
+                scrollTrigger: {
+                    trigger: section.querySelector('.project-tech'),
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            // Animação do botão CTA
+            gsap.from(section.querySelector('.project-cta-btn'), {
+                scale: 0,
+                opacity: 0,
+                duration: 0.8,
+                delay: 0.5,
+                ease: 'back.out(1.5)',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 70%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            // Animação do mockup
+            gsap.from(visual, {
+                x: isEven ? 80 : -80,
+                opacity: 0,
+                rotationY: isEven ? -15 : 15,
+                duration: 1.4,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 70%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            // Parallax do laptop (movimento contínuo no scroll)
+            gsap.to(visual.querySelector('.laptop-mockup'), {
+                y: -60,
+                rotationY: isEven ? -8 : 8,
+                rotationX: 3,
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1.5
+                }
+            });
+
+            // Parallax dos elementos de fundo
+            bgElements.forEach((el, i) => {
+                gsap.to(el, {
+                    y: i % 2 === 0 ? 150 : -150,
+                    x: i % 2 === 0 ? -80 : 80,
+                    rotation: i % 2 === 0 ? 15 : -15,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 2
+                    }
+                });
+            });
+
+            // Hover effect no mockup
+            const mockup = visual.querySelector('.laptop-mockup');
+            mockup.addEventListener('mouseenter', () => {
+                gsap.to(mockup, {
+                    rotationY: isEven ? -5 : 5,
+                    rotationX: 2,
+                    scale: 1.02,
+                    duration: 0.6,
+                    ease: 'power2.out'
+                });
+            });
+
+            mockup.addEventListener('mouseleave', () => {
+                gsap.to(mockup, {
+                    rotationY: 0,
+                    rotationX: 0,
+                    scale: 1,
+                    duration: 0.6,
+                    ease: 'power3.out'
+                });
+            });
+        });
+
+        // Final CTA Animations
+        gsap.from('.final-cta-title', {
+            y: 100,
+            opacity: 0,
+            scale: 0.95,
+            duration: 1.4,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.projects-final-cta',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        gsap.from('.final-cta-subtitle', {
+            y: 60,
+            opacity: 0,
+            duration: 1.2,
+            delay: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.projects-final-cta',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        gsap.from('.projects-final-cta .project-cta-btn', {
+            scale: 0,
+            opacity: 0,
+            duration: 0.9,
+            delay: 0.4,
+            ease: 'back.out(1.8)',
+            scrollTrigger: {
+                trigger: '.projects-final-cta',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        // ========== MAGNETIC BUTTONS ==========
+        
+        document.querySelectorAll('.project-cta-btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+                const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+                
+                gsap.to(btn, {
+                    x: x,
+                    y: y,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: 'elastic.out(1, 0.5)'
+                });
+            });
+        });
+
+        // ========== HEADER & MENU (do seu site) ==========
+        
+        const header = document.querySelector('.site-head');
+        const hamburger = document.getElementById('hamburger');
+        const drawer = document.getElementById('drawer');
+        
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 200) {
+                hamburger?.classList.add('visible');
+                header?.classList.add('hidden');
+            } else {
+                const isOpen = hamburger?.getAttribute('aria-expanded') === 'true';
+                if (!isOpen) {
+                    hamburger?.classList.remove('visible');
+                    header?.classList.remove('hidden');
+                }
+            }
+            
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        // Menu Toggle
+        hamburger?.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+            const nextState = !isOpen;
+            
+            hamburger.setAttribute('aria-expanded', String(nextState));
+            drawer.setAttribute('aria-hidden', String(!nextState));
+            drawer.style.transform = nextState ? 'translateX(0)' : 'translateX(100%)';
+        });
+
+        // Fechar menu ao clicar em link
+        drawer?.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                const isOpen = hamburger?.getAttribute('aria-expanded') === 'true';
+                if (isOpen) {
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    drawer.setAttribute('aria-hidden', 'true');
+                    drawer.style.transform = 'translateX(100%)';
+                }
+            });
+        });
+
+        // Magnetic effect no brand badge
+        const brand = document.querySelector('.brand-badge');
+        if (brand) {
+            const original = brand.textContent.trim();
+            const swap = brand.getAttribute('data-swap') || original;
+            
+            brand.addEventListener('mouseenter', () => {
+                gsap.timeline()
+                    .to(brand, { y: -2, duration: 0.15 })
+                    .to(brand, { opacity: 0, duration: 0.12 }, 0)
+                    .add(() => brand.textContent = swap, 0.08)
+                    .to(brand, { opacity: 1, duration: 0.16 }, 0.12);
+            });
+            
+            brand.addEventListener('mouseleave', () => {
+                gsap.timeline()
+                    .to(brand, { y: 0, duration: 0.18 })
+                    .to(brand, { opacity: 0, duration: 0.12 }, 0)
+                    .add(() => brand.textContent = original, 0.08)
+                    .to(brand, { opacity: 1, duration: 0.16 }, 0.12);
+            });
+        }
+
+        // Nav links hover
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const dot = link.querySelector('.nav-link-dot');
+            
+            link.addEventListener('mouseenter', () => {
+                gsap.timeline()
+                    .to(link, { y: -2, duration: 0.15, ease: 'power3.out' }, 0)
+                    .to(dot, { opacity: 1, scale: 1, duration: 0.18, ease: 'power3.out' }, 0.02);
+            });
+            
+            link.addEventListener('mouseleave', () => {
+                gsap.timeline()
+                    .to(link, { y: 0, duration: 0.18, ease: 'power3.out' }, 0)
+                    .to(dot, { opacity: 0, scale: 0.5, duration: 0.16, ease: 'power2.in' }, 0);
+            });
+        });
+
+        console.log('✨ Projects Page - Premium Experience Loaded!');
+    </script>
+</body>
+</html>
