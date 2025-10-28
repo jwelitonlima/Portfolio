@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro Estudantil · Weliton Lima</title>
+    
+    <!-- Icon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com">
+    <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.10/dist/lenis.css">
+    
+    <style>
+        /* ========== PROJECT DETAIL PAGE PREMIUM ========== */
+        
+        body {
+            background: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* Hero Principal com Parallax */
+        .project-hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 140px 40px 100px;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1d21 100%);
+            overflow: hidden;
+        }
+        
+        /* Background animado */
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+            animation: pulse-slow 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes pulse-slow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+            50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.6; }
+        }
+        
+        .project-hero-content {
+            max-width: 1400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .project-hero-number {
+            font-size: clamp(14px, 1.5vw, 18px);
+            color: var(--ink);
+            opacity: 0.5;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            font-weight: 500;
+            font-family: 'PP Neue Montreal', sans-serif;
+        }
+        
+        .project-hero-title {
+            font-size: clamp(64px, 12vw, 160px);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            color: var(--ink-strong);
+            margin: 0 0 32px 0;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .project-hero-subtitle {
+            font-size: clamp(18px, 2.5vw, 28px);
+            color: var(--ink);
+            opacity: 0.7;
+            margin: 0 0 48px 0;
+            font-weight: 400;
+            font-family: 'PP Neue Montreal', sans-serif;
+        }
+        
+        /* Tech Badges */
+        .tech-badges {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+        
+        .tech-badge {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 100px;
+            font-size: clamp(13px, 1.5vw, 15px);
+            color: var(--ink);
+            font-weight: 500;
+            font-family: 'PP Neue Montreal', sans-serif;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .tech-badge:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+            border-color: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+        
+        .tech-badge:hover::before {
+            left: 100%;
+        }
+        
+        /* Hero Image/Video */
+        .project-hero-media {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+        }
+        
+        .project-hero-media img,
+        .project-hero-media video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Project Container */
+        .project-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        /* Overview Section */
+        .project-overview {
+            padding: 15vh 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+            align-items: start;
+        }
+        
+        .overview-label {
+            font-size: 14px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--ink);
+            opacity: 0.6;
+            margin: 0 0 24px;
+            font-weight: 500;
+            font-family: 'PP Neue Montreal', sans-serif;
+        }
+        
+        .overview-title {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--ink-strong);
+            margin: 0 0 32px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .overview-text {
+            font-size: clamp(18px, 2vw, 22px);
+            line-height: 1.7;
+            color: var(--ink);
+            opacity: 0.9;
+            margin: 0 0 24px;
+            font-family: 'PP Neue Montreal', sans-serif;
+        }
+        
+        /* Gallery Masonry */
+        .project-gallery {
+            padding: 12vh 0;
+        }
+        
+        .gallery-masonry {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.02);
+            aspect-ratio: 4/3;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.16, 0.61, 0.46, 1);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+        
+        /* Features Section */
+        .project-features {
+            padding: 12vh 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .features-title {
+            font-size: clamp(40px, 7vw, 80px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            color: var(--ink-strong);
+            margin: 0 0 8vh;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            padding: 40px 32px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.16, 0.61, 0.46, 1);
+        }
+        
+        .feature-card:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 24px;
+            display: block;
+        }
+        
+        .feature-title {
+            font-size: clamp(20px, 2.5vw, 26px);
+            font-weight: 600;
+            color: var(--ink-strong);
+            margin: 0 0 16px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .feature-description {
+            font-size: clamp(16px, 1.8vw, 18px);
+            line-height: 1.6;
+            color: var(--ink);
+            opacity: 0.85;
+            margin: 0;
+            font-family: 'PP Neue Montreal', sans-serif;
+        }
+        
+        /* Project CTA */
+        .project-cta-section {
+            padding: 15vh 0;
+            text-align: center;
+            background: linear-gradient(180deg, var(--dark) 0%, #0a0a0a 100%);
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: clamp(48px, 9vw, 100px);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            color: var(--ink-strong);
+            margin: 0 0 32px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .cta-subtitle {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--ink);
+            opacity: 0.8;
+            line-height: 1.6;
+            margin: 0 0 48px;
+            font-family: 'PP Neue Montreal', sans-serif;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 48px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            color: var(--ink-strong);
+            font-size: clamp(15px, 1.8vw, 18px);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 0.61, 0.46, 1);
+            letter-spacing: 0.02em;
+            font-family: 'PP Neue Montreal', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.09));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        
+        .cta-button:hover::before {
+            opacity: 1;
+        }
+        
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button-icon {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button:hover .cta-button-icon {
+            transform: translate(4px, -4px);
+        }
+        
+        .cta-button-secondary {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .cta-button-secondary:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        /* Footer Simples */
+        .project-footer {
+            padding: 8vh 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer-text {
+            font-size: 14px;
+            color: var(--ink);
+            opacity: 0.6;
+            margin: 0;
+            font-family: 'PP Neue Montreal', sans-serif;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .gallery-masonry {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .project-hero {
+                min-height: 80vh;
+                padding: 120px 20px 80px;
+            }
+            
+            .project-container {
+                padding: 0 20px;
+            }
+            
+            .project-overview {
+                padding: 10vh 0;
+            }
+            
+            .project-gallery {
+                padding: 8vh 0;
+            }
+            
+            .project-features {
+                padding: 8vh 0;
+            }
+            
+            .project-cta-section {
+                padding: 10vh 0;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .gallery-item {
+                aspect-ratio: 16/9;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tech-badges {
+                gap: 10px;
+            }
+            
+            .tech-badge {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            
+            .feature-card {
+                padding: 28px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-head">
+        <a class="brand-badge font-ppnm" href="index.html" data-swap="← Voltar">Weliton Lima</a>
+        <nav class="top-nav font-ppnm" aria-label="Primary">
+            <a class="nav-link" href="projects.html">
+                Work
+                <span class="nav-link-dot" aria-hidden="true"></span>
+            </a>
+            <a class="nav-link" href="index.html#about">
+                About
+                <span class="nav-link-dot" aria-hidden="true"></span>
+            </a>
+            <a class="nav-link" href="index.html#contact">
+                Contact
+                <span class="nav-link-dot" aria-hidden="true"></span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Menu Flutuante -->
+    <button id="hamburger" class="floating-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
+        <span class="menu-line menu-line-1"></span>
+        <span class="menu-line menu-line-2"></span>
+        <span class="menu-line menu-line-3"></span>
+    </button>
+
+    <!-- Drawer -->
+    <aside id="drawer" class="drawer font-ppnm" aria-hidden="true">
+        <div class="drawer-header">
+            <span class="drawer-label">NAVIGATION</span>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html">Home</a>
+            <a href="projects.html">Work</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+        <div class="drawer-footer">
+            <span class="socials-label">SOCIALS</span>
+            <div class="socials-links">
+                <a href="https://awwwards.com" target="_blank" rel="noopener noreferrer">Awwwards</a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <!-- Hero -->
+        <section class="project-hero">
+            <div class="project-hero-content">
+                <p class="project-hero-number">01</p>
+                <h1 class="project-hero-title">Foro<br>Estudantil</h1>
+                <p class="project-hero-subtitle">Plataforma Educacional · 2024</p>
+                
+                <div class="tech-badges">
+                    <span class="tech-badge">HTML5</span>
+                    <span class="tech-badge">CSS3</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">PHP</span>
+                    <span class="tech-badge">MySQL</span>
+                </div>
+                
+                <div class="project-hero-media">
+                    <img src="assets/58f9d3235466787.Y3JvcCw2NjU5LDUyMDksMTQ4LDA.png" alt="Foro Estudantil Preview" loading="eager">
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Content -->
+        <div class="project-container">
+            
+            <!-- Overview -->
+            <section class="project-overview">
+                <div class="overview-grid">
+                    <div>
+                        <p class="overview-label">Visão Geral</p>
+                    </div>
+                    <div>
+                        <h2 class="overview-title">Uma plataforma educacional completa</h2>
+                        <p class="overview-text">
+                            Uma plataforma educacional completa desenvolvida para conectar estudantes e facilitar o compartilhamento de conhecimento em tempo real. O sistema incorpora tecnologias modernas com foco na experiência do usuário, criando um ambiente onde o aprendizado se torna colaborativo e acessível.
+                        </p>
+                        <p class="overview-text">
+                            Desenvolvido com atenção meticulosa aos detalhes, o Foro Estudantil oferece uma interface intuitiva e responsiva, garantindo uma experiência fluida em todos os dispositivos.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gallery -->
+            <section class="project-gallery">
+                <div class="gallery-masonry">
+                    <div class="gallery-item">
+                        <img src="assets/58f9d3235466787.Y3JvcCw2NjU5LDUyMDksMTQ4LDA.png" alt="Screenshot 1" loading="lazy">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="assets/58f9d3235466787.Y3JvcCw2NjU5LDUyMDksMTQ4LDA.png" alt="Screenshot 2" loading="lazy">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="assets/58f9d3235466787.Y3JvcCw2NjU5LDUyMDksMTQ4LDA.png" alt="Screenshot 3" loading="lazy">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="project-features">
+                <h2 class="features-title">Recursos Principais</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">⚡</span>
+                        <h3 class="feature-title">Performance Otimizada</h3>
+                        <p class="feature-description">
+                            Otimizado para carregamento rápido e experiência fluida em todos os dispositivos.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">🔒</span>
+                        <h3 class="feature-title">Segurança Avançada</h3>
+                        <p class="feature-description">
+                            Sistema de autenticação seguro com criptografia e proteção de dados.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">📱</span>
+                        <h3 class="feature-title">Design Responsivo</h3>
+                        <p class="feature-description">
+                            Design adaptativo que funciona perfeitamente em desktop, tablet e mobile.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">🔔</span>
+                        <h3 class="feature-title">Tempo Real</h3>
+                        <p class="feature-description">
+                            Notificações e atualizações em tempo real para uma experiência dinâmica.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">♿</span>
+                        <h3 class="feature-title">Acessibilidade</h3>
+                        <p class="feature-description">
+                            Interface intuitiva com foco na experiência do usuário e acessibilidade.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">📈</span>
+                        <h3 class="feature-title">Escalabilidade</h3>
+                        <p class="feature-description">
+                            Arquitetura preparada para crescimento e adição de novos recursos.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CTA Section -->
+        <section class="project-cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title">Vamos criar algo<br>extraordinário</h2>
+                <p class="cta-subtitle">
+                    Pronto para transformar sua ideia em realidade? Entre em contato para discutir seu projeto.
+                </p>
+                <div class="cta-buttons">
+                    <a href="index.html#contact" class="cta-button">
+                        <span>Iniciar Projeto</span>
+                        <span class="cta-button-icon">→</span>
+                    </a>
+                    <a href="projects.html" class="cta-button cta-button-secondary">
+                        <span>Ver Mais Projetos</span>
+                        <span class="cta-button-icon">↗</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="project-footer">
+            <p class="footer-text">© 2024 Weliton Lima. Todos os direitos reservados.</p>
+        </footer>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
+    
+    <script>
+        // ========== INICIALIZAÇÃO ==========
+        
+        console.log('🎨 Project Detail Page - Premium Experience Loading...');
+        
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            smoothTouch: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Setup
+        gsap.registerPlugin(ScrollTrigger);
+        lenis.on('scroll', ScrollTrigger.update);
+
+        // ========== ANIMAÇÕES PREMIUM ==========
+
+        // Hero Entrance
+        gsap.from('.project-hero-number', {
+            opacity: 0,
+            y: -20,
+            duration: 0.8,
+            ease: 'power3.out',
+            delay: 0.2
+        });
+
+        gsap.from('.project-hero-title', {
+            y: 100,
+            opacity: 0,
+            scale: 0.95,
+            duration: 1.4,
+            ease: 'power4.out',
+            delay: 0.3
+        });
+
+        gsap.from('.project-hero-subtitle', {
+            y: 60,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            delay: 0.5
+        });
+
+        gsap.from('.tech-badge', {
+            scale: 0,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.08,
+            ease: 'back.out(1.7)',
+            delay: 0.7
+        });
+
+        gsap.from('.project-hero-media', {
+            y: 80,
+            opacity: 0,
+            scale: 0.95,
+            duration: 1.4,
+            ease: 'power3.out',
+            delay: 0.9
+        });
+
+        // Overview Section
+        gsap.from('.overview-label', {
+            x: -60,
+            opacity: 0,
+            duration: 1,
+            scrollTrigger: {
+                trigger: '.project-overview',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        gsap.from('.overview-title', {
+            y: 60,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.project-overview',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        gsap.from('.overview-text', {
+            y: 40,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.project-overview',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        // Gallery Items
+        gsap.utils.toArray('.gallery-item').forEach((item, index) => {
+            gsap.from(item, {
+                y: 80,
+                opacity: 0,
+                scale: 0.9,
+                duration: 1.2,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 75%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            // Parallax
+            gsap.to(item, {
+                y: -40,
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1.5
+                }
+            });
+        });
+
+        // Features Section
+        gsap.from('.features-title', {
+            y: 80,
+            opacity: 0,
+            scale: 0.95,
+            duration: 1.3,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.features-title',
+                start: 'top 75%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        gsap.utils.toArray('.feature-card').forEach((card, index) => {
+            gsap.from(card, {
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                delay: index * 0.1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        });
+
+        // CTA Section
+        gsap.from('.cta-title', {
+            y: 100,
+            opacity: 0,
+            scale: 0.95,
+            duration: 1.4,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.project-cta-section',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        gsap.from('.cta-subtitle', {
+            y: 60,
+            opacity: 0,
+            duration: 1.2,
+            delay: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.project-cta-section',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        gsap.from('.cta-button', {
+            scale: 0,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'back.out(1.7)',
+            delay: 0.4,
+            scrollTrigger: {
+                trigger: '.project-cta-section',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        // ========== MAGNETIC BUTTONS ==========
+        
+        document.querySelectorAll('.cta-button').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+                const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+                
+                gsap.to(btn, {
+                    x: x,
+                    y: y,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: 'elastic.out(1, 0.5)'
+                });
+            });
+        });
+
+        // ========== HEADER & MENU ==========
+        
+        const header = document.querySelector('.site-head');
+        const hamburger = document.getElementById('hamburger');
+        const drawer = document.getElementById('drawer');
+        
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 200) {
+                hamburger?.classList.add('visible');
+                header?.classList.add('hidden');
+            } else {
+                const isOpen = hamburger?.getAttribute('aria-expanded') === 'true';
+                if (!isOpen) {
+                    hamburger?.classList.remove('visible');
+                    header?.classList.remove('hidden');
+                }
+            }
+            
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        // Menu Toggle
+        hamburger?.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+            const nextState = !isOpen;
+            
+            hamburger.setAttribute('aria-expanded', String(nextState));
+            drawer.setAttribute('aria-hidden', String(!nextState));
+            drawer.style.transform = nextState ? 'translateX(0)' : 'translateX(100%)';
+        });
+
+        drawer?.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                const isOpen = hamburger?.getAttribute('aria-expanded') === 'true';
+                if (isOpen) {
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    drawer.setAttribute('aria-hidden', 'true');
+                    drawer.style.transform = 'translateX(100%)';
+                }
+            });
+        });
+
+        // Brand Badge Hover
+        const brand = document.querySelector('.brand-badge');
+        if (brand) {
+            const original = brand.textContent.trim();
+            const swap = brand.getAttribute('data-swap') || original;
+            
+            brand.addEventListener('mouseenter', () => {
+                gsap.timeline()
+                    .to(brand, { y: -2, duration: 0.15 })
+                    .to(brand, { opacity: 0, duration: 0.12 }, 0)
+                    .add(() => brand.textContent = swap, 0.08)
+                    .to(brand, { opacity: 1, duration: 0.16 }, 0.12);
+            });
+            
+            brand.addEventListener('mouseleave', () => {
+                gsap.timeline()
+                    .to(brand, { y: 0, duration: 0.18 })
+                    .to(brand, { opacity: 0, duration: 0.12 }, 0)
+                    .add(() => brand.textContent = original, 0.08)
+                    .to(brand, { opacity: 1, duration: 0.16 }, 0.12);
+            });
+        }
+
+        // Nav Links Hover
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const dot = link.querySelector('.nav-link-dot');
+            
+            link.addEventListener('mouseenter', () => {
+                gsap.timeline()
+                    .to(link, { y: -2, duration: 0.15, ease: 'power3.out' }, 0)
+                    .to(dot, { opacity: 1, scale: 1, duration: 0.18, ease: 'power3.out' }, 0.02);
+            });
+            
+            link.addEventListener('mouseleave', () => {
+                gsap.timeline()
+                    .to(link, { y: 0, duration: 0.18, ease: 'power3.out' }, 0)
+                    .to(dot, { opacity: 0, scale: 0.5, duration: 0.16, ease: 'power2.in' }, 0);
+            });
+        });
+
+        console.log('✨ Project Detail Page - Loaded Successfully!');
+    </script>
+</body>
+</html>
