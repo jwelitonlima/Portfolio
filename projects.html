@@ -419,13 +419,16 @@
         }
         
         .final-cta-title {
-            font-size: clamp(56px, 10vw, 120px);
+            font-size: clamp(48px, 8vw, 100px);
             font-weight: 900;
             line-height: 0.95;
             letter-spacing: -0.04em;
             color: var(--ink-strong);
             margin: 0 0 32px 0;
             font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            overflow: visible;
+            text-align: center;
         }
         
         .final-cta-subtitle {
@@ -525,19 +528,20 @@
         <a class="brand-badge font-ppnm" href="index.html" data-swap="Weliton Lima">Weliton Lima</a>
         <nav class="top-nav font-ppnm" aria-label="Primary">
             <a class="nav-link" href="index.html#work">
-                Work
+                Projetos
                 <span class="nav-link-dot" aria-hidden="true"></span>
             </a>
             <a class="nav-link" href="index.html#about">
-                About
+                Sobre
                 <span class="nav-link-dot" aria-hidden="true"></span>
             </a>
             <a class="nav-link" href="index.html#contact">
-                Contact
+                Contato
                 <span class="nav-link-dot" aria-hidden="true"></span>
             </a>
         </nav>
     </header>
+
 
     <!-- Menu Flutuante -->
     <button id="hamburger" class="floating-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
@@ -546,21 +550,21 @@
         <span class="menu-line menu-line-3"></span>
     </button>
 
+
     <!-- Drawer -->
     <aside id="drawer" class="drawer font-ppnm" aria-hidden="true">
         <div class="drawer-header">
-            <span class="drawer-label">NAVIGATION</span>
+            <span class="drawer-label">NAVEGAÇÃO</span>
         </div>
         <nav class="drawer-nav">
-            <a href="index.html">Home</a>
-            <a href="projects.html">Work</a>
-            <a href="index.html#about">About</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="index.html">Pagina inicial</a>
+            <a href="projects.html">Projetos</a>
+            <a href="index.html#about">Contato</a>
+            <a href="index.html#contact">Sobre</a>
         </nav>
         <div class="drawer-footer">
-            <span class="socials-label">SOCIALS</span>
+            <span class="socials-label">REDES SOCIAIS</span>
             <div class="socials-links">
-                <a href="https://awwwards.com" target="_blank" rel="noopener noreferrer">Awwwards</a>
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -568,12 +572,14 @@
         </div>
     </aside>
 
+
     <main>
         <!-- Hero -->
         <section class="projects-hero">
-            <h1 class="projects-hero-title">Works</h1>
-            <p class="projects-hero-subtitle">Selected Projects · 2024</p>
+            <h1 class="projects-hero-title">Projetos</h1>
+            <p class="projects-hero-subtitle">Projetos Selecionados · 2025</p>
         </section>
+
 
         <!-- Projects Container -->
         <div class="projects-container">
@@ -620,6 +626,7 @@
                 </div>
             </section>
 
+
             <!-- PROJETO 2 -->
             <section class="project-showcase" data-project="2">
                 <div class="project-bg-element bg-element-1"></div>
@@ -661,6 +668,7 @@
                     </div>
                 </div>
             </section>
+
 
             <!-- PROJETO 3 -->
             <section class="project-showcase" data-project="3">
@@ -704,10 +712,11 @@
             </section>
         </div>
 
+
         <!-- Final CTA -->
         <section class="projects-final-cta">
             <div class="final-cta-content">
-                <h2 class="final-cta-title">Let's Work<br>Together</h2>
+             <h2 class="final-cta-title">Vamos trabalhar<br>juntos?</h2>
                 <p class="final-cta-subtitle">
                     Pronto para criar algo extraordinário? Entre em contato para discutir seu próximo projeto.
                 </p>
@@ -718,6 +727,7 @@
             </div>
         </section>
     </main>
+
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -737,19 +747,24 @@
             smoothTouch: false,
         });
 
+
         function raf(time) {
             lenis.raf(time);
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
 
+
         // GSAP Setup
         gsap.registerPlugin(ScrollTrigger);
+
 
         // Atualizar ScrollTrigger com Lenis
         lenis.on('scroll', ScrollTrigger.update);
 
+
         // ========== ANIMAÇÕES PREMIUM ==========
+
 
         // Hero Animation
         gsap.from('.projects-hero-title', {
@@ -761,6 +776,7 @@
             delay: 0.2
         });
 
+
         gsap.from('.projects-hero-subtitle', {
             y: 60,
             opacity: 0,
@@ -768,6 +784,7 @@
             ease: 'power3.out',
             delay: 0.5
         });
+
 
         // Project Showcases com Parallax Premium
         gsap.utils.toArray('.project-showcase').forEach((section, index) => {
@@ -788,6 +805,7 @@
                 }
             });
 
+
             gsap.from(section.querySelector('.project-title'), {
                 x: isEven ? -80 : 80,
                 opacity: 0,
@@ -799,6 +817,7 @@
                     toggleActions: 'play none none none'
                 }
             });
+
 
             gsap.from(section.querySelector('.project-category'), {
                 x: isEven ? -60 : 60,
@@ -813,6 +832,7 @@
                 }
             });
 
+
             gsap.from(section.querySelector('.project-description'), {
                 y: 40,
                 opacity: 0,
@@ -825,6 +845,7 @@
                     toggleActions: 'play none none none'
                 }
             });
+
 
             // Animação dos badges
             gsap.from(section.querySelectorAll('.tech-badge'), {
@@ -840,6 +861,7 @@
                 }
             });
 
+
             // Animação do botão CTA
             gsap.from(section.querySelector('.project-cta-btn'), {
                 scale: 0,
@@ -853,6 +875,7 @@
                     toggleActions: 'play none none none'
                 }
             });
+
 
             // Animação do mockup
             gsap.from(visual, {
@@ -868,6 +891,7 @@
                 }
             });
 
+
             // Parallax do laptop (movimento contínuo no scroll)
             gsap.to(visual.querySelector('.laptop-mockup'), {
                 y: -60,
@@ -880,6 +904,7 @@
                     scrub: 1.5
                 }
             });
+
 
             // Parallax dos elementos de fundo
             bgElements.forEach((el, i) => {
@@ -896,6 +921,7 @@
                 });
             });
 
+
             // Hover effect no mockup
             const mockup = visual.querySelector('.laptop-mockup');
             mockup.addEventListener('mouseenter', () => {
@@ -908,6 +934,7 @@
                 });
             });
 
+
             mockup.addEventListener('mouseleave', () => {
                 gsap.to(mockup, {
                     rotationY: 0,
@@ -918,6 +945,7 @@
                 });
             });
         });
+
 
         // Final CTA Animations
         gsap.from('.final-cta-title', {
@@ -933,6 +961,7 @@
             }
         });
 
+
         gsap.from('.final-cta-subtitle', {
             y: 60,
             opacity: 0,
@@ -946,6 +975,7 @@
             }
         });
 
+
         gsap.from('.projects-final-cta .project-cta-btn', {
             scale: 0,
             opacity: 0,
@@ -958,6 +988,7 @@
                 toggleActions: 'play none none none'
             }
         });
+
 
         // ========== MAGNETIC BUTTONS ==========
         
@@ -975,6 +1006,7 @@
                 });
             });
 
+
             btn.addEventListener('mouseleave', () => {
                 gsap.to(btn, {
                     x: 0,
@@ -985,6 +1017,7 @@
             });
         });
 
+
         // ========== HEADER & MENU (do seu site) ==========
         
         const header = document.querySelector('.site-head');
@@ -992,6 +1025,7 @@
         const drawer = document.getElementById('drawer');
         
         let lastScroll = 0;
+
 
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
@@ -1010,6 +1044,7 @@
             lastScroll = currentScroll;
         }, { passive: true });
 
+
         // Menu Toggle
         hamburger?.addEventListener('click', (e) => {
             e.preventDefault();
@@ -1020,6 +1055,7 @@
             drawer.setAttribute('aria-hidden', String(!nextState));
             drawer.style.transform = nextState ? 'translateX(0)' : 'translateX(100%)';
         });
+
 
         // Fechar menu ao clicar em link
         drawer?.querySelectorAll('a').forEach(link => {
@@ -1032,6 +1068,7 @@
                 }
             });
         });
+
 
         // Magnetic effect no brand badge
         const brand = document.querySelector('.brand-badge');
@@ -1056,6 +1093,7 @@
             });
         }
 
+
         // Nav links hover
         document.querySelectorAll('.nav-link').forEach(link => {
             const dot = link.querySelector('.nav-link-dot');
@@ -1072,6 +1110,7 @@
                     .to(dot, { opacity: 0, scale: 0.5, duration: 0.16, ease: 'power2.in' }, 0);
             });
         });
+
 
         console.log('✨ Projects Page - Premium Experience Loaded!');
     </script>
