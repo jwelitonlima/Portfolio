@@ -208,6 +208,52 @@
             font-family: 'PP Neue Montreal', sans-serif;
         }
         
+        /* Tech Stack Visual */
+        .tech-stack-visual {
+            margin-top: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .stack-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 100px;
+            font-size: clamp(13px, 1.5vw, 15px);
+            color: var(--ink);
+            font-weight: 500;
+            font-family: 'PP Neue Montreal', sans-serif;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        .stack-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .stack-badge:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+            border-color: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        .stack-badge:hover::before {
+            left: 100%;
+        }
+        
         /* Gallery Masonry */
         .project-gallery {
             padding: 12vh 0;
@@ -403,6 +449,56 @@
             background: rgba(255,255,255,0.05);
         }
         
+        /* Navigation Buttons */
+        .navigation-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 60px;
+            padding-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            color: var(--ink);
+            font-size: clamp(14px, 1.6vw, 16px);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 0.61, 0.46, 1);
+            letter-spacing: 0.02em;
+            font-family: 'PP Neue Montreal', sans-serif;
+            opacity: 0.8;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.05);
+            opacity: 1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn-icon {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-btn-back:hover .nav-btn-icon {
+            transform: translateX(-4px);
+        }
+
+        .nav-btn-projects:hover .nav-btn-icon {
+            transform: translateX(4px);
+        }
+        
         /* Footer Simples */
         .project-footer {
             padding: 8vh 40px;
@@ -467,6 +563,30 @@
             .gallery-item {
                 aspect-ratio: 16/9;
             }
+            
+            .tech-stack-visual {
+                margin-top: 24px;
+                gap: 10px;
+            }
+            
+            .stack-badge {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 16px;
+                margin-top: 48px;
+                padding-top: 48px;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
         
         @media (max-width: 480px) {
@@ -491,19 +611,20 @@
         <a class="brand-badge font-ppnm" href="index.html" data-swap="← Voltar">Weliton Lima</a>
         <nav class="top-nav font-ppnm" aria-label="Primary">
             <a class="nav-link" href="projects.html">
-                Work
+                Projetos
                 <span class="nav-link-dot" aria-hidden="true"></span>
             </a>
             <a class="nav-link" href="index.html#about">
-                About
+                Sobre
                 <span class="nav-link-dot" aria-hidden="true"></span>
             </a>
             <a class="nav-link" href="index.html#contact">
-                Contact
+                Contato
                 <span class="nav-link-dot" aria-hidden="true"></span>
             </a>
         </nav>
     </header>
+
 
     <!-- Menu Flutuante -->
     <button id="hamburger" class="floating-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
@@ -512,27 +633,28 @@
         <span class="menu-line menu-line-3"></span>
     </button>
 
+
     <!-- Drawer -->
     <aside id="drawer" class="drawer font-ppnm" aria-hidden="true">
         <div class="drawer-header">
-            <span class="drawer-label">NAVIGATION</span>
+            <span class="drawer-label">NAVEGAÇÃO</span>
         </div>
         <nav class="drawer-nav">
-            <a href="index.html">Home</a>
-            <a href="projects.html">Work</a>
-            <a href="index.html#about">About</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="index.html">Pagina inicial</a>
+            <a href="projects.html">Projetos</a>
+            <a href="index.html#about">Contato</a>
+            <a href="index.html#contact">Sobre</a>
         </nav>
         <div class="drawer-footer">
-            <span class="socials-label">SOCIALS</span>
+            <span class="socials-label">REDES SOCIAIS</span>
             <div class="socials-links">
-                <a href="https://awwwards.com" target="_blank" rel="noopener noreferrer">Awwwards</a>
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
         </div>
     </aside>
+
 
     <main>
         <!-- Hero -->
@@ -556,6 +678,7 @@
             </div>
         </section>
 
+
         <!-- Project Content -->
         <div class="project-container">
             
@@ -564,6 +687,16 @@
                 <div class="overview-grid">
                     <div>
                         <p class="overview-label">Visão Geral</p>
+                        
+                        <!-- TECH STACK VISUAL -->
+                        <div class="tech-stack-visual">
+                            <span class="stack-badge">HTML5</span>
+                            <span class="stack-badge">CSS3</span>
+                            <span class="stack-badge">JavaScript</span>
+                            <span class="stack-badge">PHP</span>
+                            <span class="stack-badge">MySQL</span>
+                            <span class="stack-badge">Figma</span>
+                        </div>
                     </div>
                     <div>
                         <h2 class="overview-title">Uma plataforma educacional completa</h2>
@@ -576,6 +709,7 @@
                     </div>
                 </div>
             </section>
+
 
             <!-- Gallery -->
             <section class="project-gallery">
@@ -591,6 +725,7 @@
                     </div>
                 </div>
             </section>
+
 
             <!-- Features -->
             <section class="project-features">
@@ -647,6 +782,7 @@
             </section>
         </div>
 
+
         <!-- CTA Section -->
         <section class="project-cta-section">
             <div class="cta-content">
@@ -664,14 +800,28 @@
                         <span class="cta-button-icon">↗</span>
                     </a>
                 </div>
+                
+                <!-- Navigation Buttons -->
+                <div class="navigation-buttons">
+                    <a href="index.html" class="nav-btn nav-btn-back">
+                        <span class="nav-btn-icon">←</span>
+                        <span>Página Inicial</span>
+                    </a>
+                    <a href="projects.html" class="nav-btn nav-btn-projects">
+                        <span>Todos os Projetos</span>
+                        <span class="nav-btn-icon">→</span>
+                    </a>
+                </div>
             </div>
         </section>
+
 
         <!-- Footer -->
         <footer class="project-footer">
             <p class="footer-text">© 2024 Weliton Lima. Todos os direitos reservados.</p>
         </footer>
     </main>
+
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -691,17 +841,21 @@
             smoothTouch: false,
         });
 
+
         function raf(time) {
             lenis.raf(time);
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
 
+
         // GSAP Setup
         gsap.registerPlugin(ScrollTrigger);
         lenis.on('scroll', ScrollTrigger.update);
 
+
         // ========== ANIMAÇÕES PREMIUM ==========
+
 
         // Hero Entrance
         gsap.from('.project-hero-number', {
@@ -712,6 +866,7 @@
             delay: 0.2
         });
 
+
         gsap.from('.project-hero-title', {
             y: 100,
             opacity: 0,
@@ -721,6 +876,7 @@
             delay: 0.3
         });
 
+
         gsap.from('.project-hero-subtitle', {
             y: 60,
             opacity: 0,
@@ -728,6 +884,7 @@
             ease: 'power3.out',
             delay: 0.5
         });
+
 
         gsap.from('.tech-badge', {
             scale: 0,
@@ -738,6 +895,7 @@
             delay: 0.7
         });
 
+
         gsap.from('.project-hero-media', {
             y: 80,
             opacity: 0,
@@ -746,6 +904,7 @@
             ease: 'power3.out',
             delay: 0.9
         });
+
 
         // Overview Section
         gsap.from('.overview-label', {
@@ -759,6 +918,7 @@
             }
         });
 
+
         gsap.from('.overview-title', {
             y: 60,
             opacity: 0,
@@ -770,6 +930,7 @@
                 toggleActions: 'play none none none'
             }
         });
+
 
         gsap.from('.overview-text', {
             y: 40,
@@ -783,6 +944,9 @@
                 toggleActions: 'play none none none'
             }
         });
+
+
+      
 
         // Gallery Items
         gsap.utils.toArray('.gallery-item').forEach((item, index) => {
@@ -799,6 +963,7 @@
                 }
             });
 
+
             // Parallax
             gsap.to(item, {
                 y: -40,
@@ -810,6 +975,7 @@
                 }
             });
         });
+
 
         // Features Section
         gsap.from('.features-title', {
@@ -824,6 +990,7 @@
                 toggleActions: 'play none none none'
             }
         });
+
 
         gsap.utils.toArray('.feature-card').forEach((card, index) => {
             gsap.from(card, {
@@ -840,6 +1007,7 @@
             });
         });
 
+
         // CTA Section
         gsap.from('.cta-title', {
             y: 100,
@@ -854,6 +1022,7 @@
             }
         });
 
+
         gsap.from('.cta-subtitle', {
             y: 60,
             opacity: 0,
@@ -866,6 +1035,7 @@
                 toggleActions: 'play none none none'
             }
         });
+
 
         gsap.from('.cta-button', {
             scale: 0,
@@ -881,6 +1051,7 @@
             }
         });
 
+
         // ========== MAGNETIC BUTTONS ==========
         
         document.querySelectorAll('.cta-button').forEach(btn => {
@@ -888,6 +1059,33 @@
                 const rect = btn.getBoundingClientRect();
                 const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
                 const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+                
+                gsap.to(btn, {
+                    x: x,
+                    y: y,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+
+
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: 'elastic.out(1, 0.5)'
+                });
+            });
+        });
+
+
+        // Magnetic effect for nav buttons
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width - 0.5) * 15;
+                const y = ((e.clientY - rect.top) / rect.height - 0.5) * 15;
                 
                 gsap.to(btn, {
                     x: x,
@@ -907,6 +1105,7 @@
             });
         });
 
+
         // ========== HEADER & MENU ==========
         
         const header = document.querySelector('.site-head');
@@ -914,6 +1113,7 @@
         const drawer = document.getElementById('drawer');
         
         let lastScroll = 0;
+
 
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
@@ -932,6 +1132,7 @@
             lastScroll = currentScroll;
         }, { passive: true });
 
+
         // Menu Toggle
         hamburger?.addEventListener('click', (e) => {
             e.preventDefault();
@@ -943,6 +1144,7 @@
             drawer.style.transform = nextState ? 'translateX(0)' : 'translateX(100%)';
         });
 
+
         drawer?.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 const isOpen = hamburger?.getAttribute('aria-expanded') === 'true';
@@ -953,6 +1155,7 @@
                 }
             });
         });
+
 
         // Brand Badge Hover
         const brand = document.querySelector('.brand-badge');
@@ -977,6 +1180,7 @@
             });
         }
 
+
         // Nav Links Hover
         document.querySelectorAll('.nav-link').forEach(link => {
             const dot = link.querySelector('.nav-link-dot');
@@ -993,6 +1197,7 @@
                     .to(dot, { opacity: 0, scale: 0.5, duration: 0.16, ease: 'power2.in' }, 0);
             });
         });
+
 
         console.log('✨ Project Detail Page - Loaded Successfully!');
     </script>
