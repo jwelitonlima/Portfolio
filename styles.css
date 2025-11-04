@@ -1870,3 +1870,497 @@ body {
 }
 
 /* ========== Fim do CSS ========== */
+
+/* ===============================================
+   BLOCO 1: HERO SECTION & NAVEGAÇÃO
+   Media Queries: 900px | 600px | 480px
+   Clean Code - Sem reset de estilos existentes
+   =============================================== */
+
+/* --------- 900px Breakpoint --------- */
+@media (max-width: 900px) {
+  /* Hero adjustments for tablets */
+  .name-wrapper {
+    padding: 0 0 38vh 10vw;
+  }
+
+  .name-line {
+    font-size: clamp(36px, 9vw, 90px);
+  }
+
+  .cta-wrapper {
+    left: 65vw;
+    bottom: 7vh;
+    right: auto;
+  }
+
+  .cta-card-text h2 {
+    font-size: clamp(18px, 4vw, 28px);
+  }
+
+  .floating-menu-btn {
+    top: 20px;
+    right: 20px;
+    bottom: auto;
+  }
+}
+
+/* --------- 600px Breakpoint --------- */
+@media (max-width: 600px) {
+  /* Hero positioning for medium mobile */
+  .name-wrapper {
+    padding: 0 0 35vh 8vw;
+  }
+
+  .name-line {
+    font-size: clamp(32px, 8vw, 70px);
+  }
+
+  .cta-wrapper {
+    left: 54vw;
+    bottom: 4vh;
+  }
+
+  .cta-card {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  /* Navigation adjustments */
+  .site-head {
+    left: 20px;
+    right: 20px;
+    top: 20px;
+  }
+
+  .floating-menu-btn {
+    bottom: 24px;
+    top: auto;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .menu-line {
+    width: 20px;
+  }
+}
+
+/* --------- 480px Breakpoint --------- */
+@media (max-width: 480px) {
+  /* Small mobile hero */
+  .name-line {
+    font-size: clamp(28px, 8vw, 60px);
+  }
+
+  .cta-wrapper {
+    left: auto;
+    right: 8vw;
+    bottom: 6vh;
+  }
+
+  .cta-card {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .cta-card .arrow {
+    font-size: 18px;
+  }
+
+  /* Header for small screens */
+  .site-head {
+    left: 12px;
+    right: 12px;
+    top: 16px;
+  }
+
+  .floating-menu-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .menu-line {
+    width: 18px;
+  }
+}
+/* ===============================================
+   BLOCO 2: WORKS/PROJETOS SECTION
+   Media Queries: 900px | 600px | 480px
+   Clean Code - Responsividade fluida
+   =============================================== */
+
+/* --------- 900px Breakpoint --------- */
+@media (max-width: 900px) {
+  /* Project preview adjustments */
+  .project-preview-content {
+    padding: 0 20px;
+  }
+
+  .project-preview-title {
+    font-size: clamp(40px, 8vw, 100px);
+    margin-bottom: 20px;
+    line-height: 0.9;
+  }
+
+  .project-preview-meta {
+    font-size: clamp(16px, 3.5vw, 20px);
+    margin-bottom: 30px;
+  }
+
+  .discover-btn {
+    padding: 16px 32px;
+    font-size: 16px;
+  }
+
+  .works-giant {
+    font-size: clamp(48px, 9vw, 140px);
+  }
+}
+
+/* --------- 600px Breakpoint --------- */
+@media (max-width: 600px) {
+  /* Medium mobile project view */
+  .project-preview-content {
+    padding: 0 16px;
+  }
+
+  .project-preview-title {
+    font-size: clamp(32px, 7vw, 72px);
+    margin-bottom: 16px;
+  }
+
+  .project-preview-meta {
+    font-size: clamp(14px, 3.5vw, 18px);
+    margin-bottom: 24px;
+  }
+
+  .discover-btn {
+    padding: 14px 28px;
+    font-size: 14px;
+  }
+
+  .btn-arrow {
+    font-size: 16px;
+  }
+
+  .works-giant {
+    font-size: clamp(36px, 8vw, 80px);
+  }
+}
+
+/* --------- 480px Breakpoint --------- */
+@media (max-width: 480px) {
+  /* Small mobile project view */
+  .project-preview-content {
+    padding: 0 12px;
+  }
+
+  .project-preview-title {
+    font-size: clamp(28px, 6.5vw, 56px);
+    margin-bottom: 12px;
+  }
+
+  .project-preview-meta {
+    font-size: clamp(12px, 3vw, 16px);
+    margin-bottom: 20px;
+  }
+
+  .discover-btn {
+    padding: 12px 24px;
+    font-size: 13px;
+  }
+
+  .btn-arrow {
+    font-size: 14px;
+  }
+
+  .works-giant {
+    font-size: clamp(32px, 7vw, 64px);
+  }
+}
+/* ===============================================
+   BLOCO 3: CONTACT SECTION
+   Media Queries: 900px | 600px | 480px
+   Clean Code - Estilo Dennis Snellenberg
+   =============================================== */
+
+/* --------- 900px Breakpoint --------- */
+@media (max-width: 900px) {
+  /* Contact container adjustments */
+  .contact-container {
+    padding: 0 6vw;
+  }
+
+  .contact-title {
+    font-size: clamp(40px, 9vw, 56px);
+    font-weight: 500;
+    font-family: 'PP Neue Montreal', Inter, ui-sans-serif, system-ui;
+    line-height: 1.3;
+    text-align: left;
+    letter-spacing: normal;
+    margin: 0;
+  }
+
+  /* Email e Telefone - Lado a lado */
+  .contact-info {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+  }
+
+  .info-block {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 140px;
+  }
+
+  .info-label {
+    display: none;
+  }
+
+  .info-link {
+    display: block;
+    padding: 18px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    font-size: clamp(13px, 3.5vw, 16px);
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.3s ease;
+  }
+
+  .info-link:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  /* Social Links Layout */
+  .social-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 70px;
+    padding-top: 20px;
+    position: relative;
+  }
+
+  .social-links::before {
+    content: 'SOCIALS';
+    width: 100%;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+
+  .social-link {
+    font-size: clamp(13px, 3.5vw, 16px);
+    font-weight: 400;
+    text-decoration: none;
+    color: var(--ink);
+    transition: opacity 0.3s ease;
+    display: inline;
+  }
+
+  .social-link:hover {
+    opacity: 0.7;
+  }
+
+  /* Footer Layout */
+  .contact-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
+  }
+
+  .footer-copy,
+  .footer-tagline {
+    font-size: clamp(12px, 2.8vw, 14px);
+    font-weight: 400;
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  .footer-copy::before {
+    content: 'VERSION';
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+    margin-bottom: 6px;
+  }
+
+  .footer-tagline::before {
+    content: 'LOCAL TIME';
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+    margin-bottom: 6px;
+  }
+
+  /* Hide Sobre */
+  .about-zoom-reveal {
+    display: none;
+  }
+
+  /* Hide form */
+  .contact-form-wrapper,
+  .premium-form {
+    display: none;
+  }
+}
+
+/* --------- 600px Breakpoint --------- */
+@media (max-width: 600px) {
+  /* Medium mobile contact */
+  .contact-container {
+    padding: 0 5vw;
+  }
+
+  .contact-title {
+    font-size: clamp(32px, 8vw, 44px);
+    margin-bottom: 40px;
+  }
+
+  .contact-info {
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .info-block {
+    flex: 1 1 calc(50% - 6px);
+    min-width: 120px;
+  }
+
+  .info-link {
+    padding: 16px 16px;
+    font-size: clamp(12px, 3vw, 14px);
+  }
+
+  .social-links {
+    margin-bottom: 50px;
+  }
+
+  .social-link {
+    font-size: clamp(12px, 3vw, 14px);
+  }
+
+  .contact-footer {
+    gap: 30px;
+  }
+
+  .footer-copy,
+  .footer-tagline {
+    font-size: clamp(11px, 2.5vw, 13px);
+  }
+}
+
+/* --------- 480px Breakpoint --------- */
+@media (max-width: 480px) {
+  /* Small mobile contact */
+  .contact-container {
+    padding: 0 4vw;
+  }
+
+  .contact-title {
+    font-size: clamp(26px, 7vw, 36px);
+    margin-bottom: 30px;
+  }
+
+  .contact-info {
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+
+  .info-block {
+    flex: 1 1 calc(50% - 5px);
+    min-width: 100px;
+  }
+
+  .info-link {
+    padding: 14px 14px;
+    font-size: clamp(11px, 2.5vw, 13px);
+  }
+
+  .social-links {
+    margin-bottom: 40px;
+  }
+
+  .social-link {
+    font-size: clamp(11px, 2.5vw, 13px);
+  }
+
+  .contact-footer {
+    gap: 20px;
+    padding-top: 20px;
+  }
+
+  .footer-copy,
+  .footer-tagline {
+    font-size: clamp(10px, 2vw, 12px);
+  }
+}
+/* ===============================================
+   BLOCO 4: ANIMAÇÕES, TRANSIÇÕES & ACESSIBILIDADE
+   Clean Code - Performance otimizado
+   =============================================== */
+
+/* Smooth scrolling for mobile */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .info-link,
+  .social-link,
+  .discover-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .info-link,
+  .social-link,
+  .discover-btn {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .info-link,
+  .discover-btn {
+    border-width: 2px;
+  }
+}
+
+/* Reduced data mode */
+@media (prefers-reduced-data: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
